@@ -3,6 +3,12 @@
     margin-top: 1px;
     float: right
 }
+.x-nav a{
+    cursor: default;
+}
+.x-nav a:hover{
+    color: #999 !important;
+}
 .active a{
     display: inline-block;
     background: #009688 0 0 no-repeat;
