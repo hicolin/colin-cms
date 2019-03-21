@@ -62,7 +62,7 @@ use yii\helpers\Url;
                             <?= $list['status'] == 1 ? 'checked' : '' ?> <?= $list['id'] ==1 ? 'disabled' : '' ?>>
                     </span>
                 <td class="td-manage">
-                    <a title="编辑"  onclick="x_admin_show('编辑','<?= Url::to(['member/update', 'id' => $list['id']])?>')" href="javascript:;">
+                    <a title="编辑"  onclick="x_admin_show('编辑','<?= Url::to(['user/update', 'id' => $list['id']])?>')" href="javascript:;">
                         <i class="layui-icon">&#xe642;</i>
                     </a>
                     <a title="删除" onclick="del(this,'<?= $list['id'] ?>', '<?= Url::to(['user/del']) ?>')" href="javascript:;">
@@ -91,9 +91,7 @@ use yii\helpers\Url;
 <script>
     function changeStatus(id, status) {
         if (id == 1) {
-            layer.msg('admin禁止禁用', {icon: 2, time: 2000}, function () {
-                location.reload();
-            });
+            layer.msg('admin禁止禁用', {icon: 2, time: 2000});
             return false;
         }
         layer.load(3);

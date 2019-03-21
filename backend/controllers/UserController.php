@@ -51,14 +51,34 @@ class UserController extends BaseController
         $roles = Role::find()->orderBy('id asc')->all();
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $member = new User();
-            $res = $member->create($post);
+            $user = new User();
+            $res = $user->create($post);
             if ($res['status'] != 200) {
                 return $this->json(100, $res['msg']);
             }
             return $this->json(200, $res['msg']);
         }
         return $this->render('create', compact('roles'));
+    }
+
+    public function actionUpdate()
+    {
+        $id = Yii::$app->request->get('id');
+        $user = User::findOne($id);
+        $roles = Role::find()->orderBy('id asc')->all();
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($post['id'] == 1 && $post['status'] != 1) {
+                return $this->json(100, 'admin禁止禁用');
+            }
+            $user = new User();
+            $res = $user->edit($post);
+            if ($res['status'] != 200) {
+                return $this->json(100, $res['msg']);
+            }
+            return $this->json(200, $res['msg']);
+        }
+        return $this->render('update', compact('user', 'roles'));
     }
 
         public function actionChangeStatus()

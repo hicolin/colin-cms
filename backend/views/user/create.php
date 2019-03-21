@@ -4,11 +4,11 @@ use yii\helpers\Url;
 <div class="x-body layui-anim layui-anim-up">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label for="tel" class="layui-form-label">
+            <label for="name" class="layui-form-label">
                 <span class="x-red">*</span> 用户名
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="tel" name="tel" required=""
+                <input type="text" id="name" name="name" required=""
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -17,19 +17,10 @@ use yii\helpers\Url;
         </div>
         <div class="layui-form-item">
             <label for="pwd" class="layui-form-label">
-                <span class="x-red">*</span> 密码
-            </label>
-            <div class="layui-input-inline">
-                <input type="password" id="pwd" name="pwd" lay-verify="pwd"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="pwd" class="layui-form-label">
                 角色
             </label>
             <div class="layui-input-inline">
-                <select name="role" id="role">
+                <select name="role_id" id="role_id">
                     <?php foreach ($roles as $list): ?>
                     <option value="<?= $list['id'] ?>"><?= $list['name'] ?></option>
                     <?php endforeach; ?>
@@ -41,6 +32,15 @@ use yii\helpers\Url;
             <div class="layui-input-block">
                 <input type="radio" value="1" name="status" lay-skin="primary" title="启用" checked="">
                 <input type="radio" value="2" name="status" lay-skin="warning" title="禁用">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="pwd" class="layui-form-label">
+                <span class="x-red">*</span> 密码
+            </label>
+            <div class="layui-input-inline">
+                <input type="password" id="pwd" name="pwd" lay-verify="pwd"
+                       autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">

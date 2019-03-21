@@ -28,19 +28,19 @@ use yii\helpers\Url;
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" value="1" name="status" lay-skin="primary" title="启用" checked="">
+                <input type="radio" value="2" name="status" lay-skin="warning" title="禁用">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label for="pwd" class="layui-form-label">
                 <span class="x-red">*</span> 密码
             </label>
             <div class="layui-input-inline">
                 <input type="password" id="pwd" name="pwd" lay-verify="pwd"
                        autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">状态</label>
-            <div class="layui-input-block">
-                <input type="radio" value="1" name="status" lay-skin="primary" title="启用" checked="">
-                <input type="radio" value="2" name="status" lay-skin="warning" title="禁用">
             </div>
         </div>
         <div class="layui-form-item">
