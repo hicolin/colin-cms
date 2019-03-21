@@ -21,7 +21,7 @@ function del(obj, id, url){
                     $(obj).parents("tr").remove();
                 })
             } else {
-                layer.msg(res.msg, {icon: 5, time: 1500})
+                layer.msg(res.msg, {icon: 2, time: 1500})
             }
         }, 'json');
     });
@@ -40,7 +40,7 @@ function batch_del (url) {
                     location.reload();
                 })
             } else {
-                layer.msg(res.msg, {icon: 5, time: 1500})
+                layer.msg(res.msg, {icon: 2, time: 1500})
             }
         }, 'json')
     });

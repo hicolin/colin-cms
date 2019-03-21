@@ -95,7 +95,7 @@ use yii\helpers\Url;
 <script>
     function changeStatus(id, status) {
         layer.load(3);
-        $.post('<?= Url::to(['member/change-status']) ?>', {id: id, status: status}, function (res) {
+        $.post('<?= Url::to([$this->context->id . '/change-status']) ?>', {id: id, status: status}, function (res) {
             layer.closeAll();
             var icon = 2;
             if (res.status === 200){
