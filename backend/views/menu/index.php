@@ -5,9 +5,9 @@ use yii\helpers\Url;
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="javascript:;">首页</a>
-        <a href="javascript:;">会员管理</a>
+        <a href="javascript:;">菜单路由管理</a>
         <a href="javascript:;">
-          <cite>会员列表</cite>
+          <cite>菜单列表</cite>
         </a>
       </span>
     <a class="layui-btn layui-btn-small refresh-btn" href="javascript:location.replace(location.href);" title="刷新">
@@ -16,10 +16,8 @@ use yii\helpers\Url;
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-            <input type="text" name="search[nickname]"  placeholder="昵称"
-                   value="<?= isset($search['nickname']) ? $search['nickname'] : '' ?>" autocomplete="off" class="layui-input">
-            <input type="text" name="search[tel]"  placeholder="手机号"
-                   value="<?= isset($search['tel']) ? $search['tel'] : '' ?>" autocomplete="off" class="layui-input">
+            <input type="text" name="search[name]"  placeholder="菜单名"
+                   value="<?= isset($search['name']) ? $search['name'] : '' ?>" autocomplete="off" class="layui-input">
             <input class="layui-input" placeholder="开始日" name="search[b_time]" id="start"
                    value="<?= isset($search['b_time']) ? $search['b_time'] : '' ?>" autocomplete="off">
             <input class="layui-input" placeholder="截止日" name="search[e_time]" id="end"
@@ -32,7 +30,7 @@ use yii\helpers\Url;
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="batch_del('<?= Url::to([$this->context->id . '/batch-del']) ?>')"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','<?=  Url::to([$this->context->id . '/create']) ?>')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加','<?=  Url::to([$this->context->id . '/create']) ?>')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：<span class="count_num"><?= $pagination->totalCount ?></span> 条 ( <?= $pagination->getPageCount() ?> 页 )</span>
     </xblock>
     <table class="layui-table">
@@ -42,11 +40,11 @@ use yii\helpers\Url;
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
-            <th>昵称</th>
-            <th>手机号码</th>
-            <th>邮箱</th>
-            <th>创建时间</th>
+            <th>菜单名</th>
+            <th>图标</th>
+            <th>排序</th>
             <th>状态</th>
+            <th>创建时间</th>
             <th>操作</th>
         </thead>
         <tbody>
@@ -56,16 +54,15 @@ use yii\helpers\Url;
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='<?= $list['id']?>'><i class="layui-icon">&#xe605;</i></div>
                 </td>
                 <td><?= $list['id'] ?></td>
-                <td><?= $list['nickname'] ?></td>
-                <td><?= $list['tel'] ?></td>
-                <td><?= $list['email'] ?></td>
+                <td><?= $list['name'] ?></td>
+                <td><i class="iconfont"><?= $list['icon'] ?></i></td>
+                <td><?= $list['sort'] ?></td>
+                <td><?= $list['is_show'] == 1 ? '显示' : '隐藏' ?></td>
                 <td><?= date('Y-m-d H:i:s', $list['create_time']) ?></td>
-                <td class="td-status">
-                    <span class="layui-form" onclick="changeStatus('<?= $list['id'] ?>', '<?= $list['status'] ?>')">
-                        <input type="checkbox" name="status" lay-skin="switch" lay-text="启用|禁用"
-                            <?= $list['status'] == 1 ? 'checked' : '' ?>>
-                    </span>
                 <td class="td-manage">
+                    <a title="子菜单"  onclick="x_admin_show('子菜单','<?= Url::to([$this->context->id . '/submenu', 'id' => $list['id']])?>')" href="javascript:;">
+                        <i class="iconfont iconzicaidan" style="font-size: 13px"></i>
+                    </a>
                     <a title="编辑"  onclick="x_admin_show('编辑','<?= Url::to([$this->context->id . '/update', 'id' => $list['id']])?>')" href="javascript:;">
                         <i class="layui-icon">&#xe642;</i>
                     </a>
@@ -92,18 +89,4 @@ use yii\helpers\Url;
 </div>
 
 <?php $this->beginBlock('footer') ?>
-<script>
-    function changeStatus(id, status) {
-        layer.load(3);
-        $.post('<?= Url::to([$this->context->id . '/change-status']) ?>', {id: id, status: status}, function (res) {
-            layer.closeAll();
-            var icon = 2;
-            if (res.status === 200){
-                // $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                icon = 1;
-            }
-            layer.msg(res.msg, {icon: icon, time: 1500})
-        }, 'json')
-    }
-</script>
 <?php $this->endBlock() ?>

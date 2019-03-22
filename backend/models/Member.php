@@ -79,7 +79,7 @@ class Member extends Base
             $model->password = Yii::$app->security->generatePasswordHash($data['pwd']);
         }
         if (!$model->save()) {
-            $error = array_values($this->getFirstErrors())[0];
+            $error = array_values($model->getFirstErrors())[0];
             return $this->arrData(100, $error);
         }
         return $this->arrData(200, '更新成功');

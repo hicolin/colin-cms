@@ -52,8 +52,8 @@ class MemberController extends BaseController
     {
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $member = new Member();
-            $res = $member->create($post);
+            $model = new Member();
+            $res = $model->create($post);
             if ($res['status'] != 200) {
                 return $this->json(100, $res['msg']);
             }
@@ -65,17 +65,17 @@ class MemberController extends BaseController
     public function actionUpdate()
     {
         $id = Yii::$app->request->get('id');
-        $member = Member::findOne($id);
+        $model = Member::findOne($id);
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $member = new Member();
-            $res = $member->edit($post);
+            $model = new Member();
+            $res = $model->edit($post);
             if ($res['status'] != 200) {
                 return $this->json(100, $res['msg']);
             }
             return $this->json(200, $res['msg']);
         }
-        return $this->render('update', compact('member'));
+        return $this->render('update', compact('model'));
     }
 
     public function actionChangeStatus()

@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Url;
+?>
 <div class="x-body">
     <form action="" method="post" class="layui-form layui-form-pane">
         <div class="layui-form-item">
@@ -10,94 +13,74 @@
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
+            <label for="description" class="layui-form-label">
+                描述
+            </label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" id="description" name="description" class="layui-textarea" style="min-height: 50px"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">
                 拥有权限
             </label>
             <table  class="layui-table layui-input-block">
                 <tbody>
+                <?php foreach ($submenus as $list): ?>
                 <tr>
-                    <td>
-                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="用户管理">
+                    <td style="width: 180px" class="submenu_name">
+                        <input type="checkbox" name="submenu_name[]" lay-skin="primary" title="<?= $list['route_name'] ?>">
                     </td>
                     <td>
                         <div class="layui-input-block">
-                            <input name="id[]" lay-skin="primary" type="checkbox" title="用户停用" value="2">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户删除">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户修改">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户列表">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户列表">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户列表">
+                            <?php foreach ($list['route'] as $item): ?>
+                            <input name="ids[]" lay-skin="primary" type="checkbox" value="<?= $item['id'] ?>" title="<?= $item['route_name'] ?>">
+                            <?php endforeach; ?>
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-
-                        <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章管理">
-                    </td>
-                    <td>
-                        <div class="layui-input-block">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章添加">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章删除">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章修改">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章列表">
-                        </div>
-                    </td>
-                </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <label for="desc" class="layui-form-label">
-                描述
-            </label>
-            <div class="layui-input-block">
-                <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>
-            </div>
         </div>
         <div class="layui-form-item">
             <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
         </div>
     </form>
 </div>
+
+<?php $this->beginBlock('footer') ?>
 <script>
     layui.use(['form','layer'], function(){
         $ = layui.jquery;
-        var form = layui.form
-            ,layer = layui.layer;
+        var form = layui.form, layer = layui.layer;
 
-        //自定义验证规则
-        form.verify({
-            nikename: function(value){
-                if(value.length < 5){
-                    return '昵称至少得5个字符啊';
-                }
+        $('.submenu_name').click(function () {
+            if ($(this).find('input').prop('checked')) {
+                $(this).next().find('.layui-input-block').find('input').attr('checked', 'checked');
+            } else {
+                $(this).next().find('.layui-input-block').find('input').removeAttr('checked');
             }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
-            }
+            form.render("checkbox")
         });
 
         //监听提交
         form.on('submit(add)', function(data){
-            console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
+            layer.load(3);
+            $.post('<?= Url::to(['role/create']) ?>', data.field, function (res) {
+                layer.closeAll();
+                if (res.status === 200) {
+                    layer.msg(res.msg, {icon: 1,time: 1500}, function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                        parent.location.reload();
+                    })
+                } else {
+                    layer.msg(res.msg, {icon: 2, time: 1500})
+                }
+            }, 'json');
             return false;
         });
-
-
     });
 </script>
+<?php $this->endBlock() ?>

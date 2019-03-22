@@ -6,14 +6,14 @@ use yii\helpers\Url;
         <div class="layui-form-item">
             <label for="nickname" class="layui-form-label">昵称</label>
             <div class="layui-input-inline">
-                <input type="hidden" name="id" value="<?= $member['id'] ?>">
-                <input type="text" id="nickname" name="nickname" autocomplete="off" class="layui-input" value="<?= $member['nickname'] ?>">
+                <input type="hidden" name="id" value="<?= $model['id'] ?>">
+                <input type="text" id="nickname" name="nickname" autocomplete="off" class="layui-input" value="<?= $model['nickname'] ?>">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="email" class="layui-form-label">邮箱</label>
             <div class="layui-input-inline">
-                <input type="text" id="email" name="email" autocomplete="off" class="layui-input" value="<?= $member['email'] ?>">
+                <input type="text" id="email" name="email" autocomplete="off" class="layui-input" value="<?= $model['email'] ?>">
             </div>
         </div>
         <div class="layui-form-item">
@@ -22,7 +22,7 @@ use yii\helpers\Url;
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="tel" name="tel" required="" lay-verify="phone"
-                       autocomplete="off" class="layui-input" value="<?= $member['tel'] ?>">
+                       autocomplete="off" class="layui-input" value="<?= $model['tel'] ?>">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span> 将会成为您唯一的登入名
@@ -31,8 +31,8 @@ use yii\helpers\Url;
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <input type="radio" value="1" name="status" lay-skin="primary" title="启用" <?= $member['status'] == 1 ? 'checked' : '' ?>>
-                <input type="radio" value="2" name="status" lay-skin="warning" title="禁用" <?= $member['status'] == 2 ? 'checked' : '' ?>>
+                <input type="radio" value="1" name="status" lay-skin="primary" title="启用" <?= $model['status'] == 1 ? 'checked' : '' ?>>
+                <input type="radio" value="2" name="status" lay-skin="warning" title="禁用" <?= $model['status'] == 2 ? 'checked' : '' ?>>
             </div>
         </div>
         <div class="layui-form-item">

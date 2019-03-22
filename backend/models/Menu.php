@@ -2,23 +2,26 @@
 
 namespace backend\models;
 
+use Yii;
+
 /**
- * This is the model class for table "colin_role".
+ * This is the model class for table "colin_menu".
  *
- * @property string $id 用户角色表
- * @property string $name 角色名
- * @property string $description 角色描述
- * @property string $permission 权限
+ * @property string $id 菜单表
+ * @property string $name 菜单名
+ * @property string $icon 图标
+ * @property int $is_show 是否显示 1:显示 2:隐藏
+ * @property int $sort 排序
  * @property int $create_time 创建时间
  */
-class Role extends Base
+class Menu extends Base
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'colin_role';
+        return 'colin_menu';
     }
 
     /**
@@ -27,10 +30,9 @@ class Role extends Base
     public function rules()
     {
         return [
-            [['create_time'], 'integer'],
-            [['name'], 'string', 'max' => 50],
-            [['description'], 'string', 'max' => 100],
-            [['permission'], 'string', 'max' => 500],
+            [['is_show', 'sort', 'create_time'], 'integer'],
+            [['name'], 'string', 'max' => 100],
+            [['icon'], 'string', 'max' => 32],
         ];
     }
 
@@ -41,9 +43,10 @@ class Role extends Base
     {
         return [
             'id' => 'ID',
-            'name' => '角色名',
-            'description' => '描述',
-            'permission' => '权限',
+            'name' => '菜单名',
+            'icon' => '图标',
+            'is_show' => '是否显示',
+            'sort' => '排序',
             'create_time' => '创建时间',
         ];
     }
@@ -51,8 +54,12 @@ class Role extends Base
     public function create($data)
     {
         $this->name = $data['name'];
-        $this->description = $data['description'];
-        $this->permission = json_encode($data['ids']);
+        $this->icon = $data['icon'];
+        if (!$data['sort']) {
+            $data['sort'] = 10;
+        }
+        $this->sort = $data['sort'];
+        $this->is_show = $data['is_show'];
         $this->create_time = time();
         if (!$this->save()) {
             $error = array_values($this->getFirstErrors())[0];
@@ -65,15 +72,17 @@ class Role extends Base
     {
         $model = self::findOne($data['id']);
         $model->name = $data['name'];
-        $model->description = $data['description'];
-        $model->permission = json_encode($data['ids']);
-        $model->create_time = time();
+        $model->icon = $data['icon'];
+        $model->is_show = $data['is_show'];
+        if (!$data['sort']) {
+            $data['sort'] = 10;
+        }
+        $model->sort = $data['sort'];
         if (!$model->save()) {
             $error = array_values($model->getFirstErrors())[0];
             return $this->arrData(100, $error);
         }
         return $this->arrData(200, '更新成功');
     }
-
 
 }

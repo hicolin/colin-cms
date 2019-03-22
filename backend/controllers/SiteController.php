@@ -1,100 +1,58 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\User;
 use Yii;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
-
-    /**
-     * Login action.
-     *
-     * @return string
-     */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            $user = User::findOne(['name' => $post['name']]);
+            $msg = '用户名或密码不正确';
+            if (!$user) {
+                return $this->json(100, $msg);
+            }
+            $res = Yii::$app->security->validatePassword($post['password'], $user->password);
+            if (!$res) {
+                return $this->json(100, $msg);
+            }
+            if ($user->status == 2) {
+                return $this->json(100, '该用户已被禁用，请联系管理员');
+            }
+            Yii::$app->user->login($user);
+            return $this->json(200, '登录成功');
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
+        return $this->render('login');
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
-        return $this->goHome();
+        return $this->redirect(['site/login']);
     }
+
+    /**
+     * ajax 返回json数据
+     * @param $status
+     * @param $msg
+     * @param string $data
+     * @return string
+     */
+    public function json($status, $msg, $data = '')
+    {
+        if ($data) {
+            return json_encode(['status' => $status, 'msg' => $msg, 'data' => $data]);
+        } else {
+            return json_encode(['status' => $status, 'msg' => $msg]);
+        }
+    }
+
+
 }

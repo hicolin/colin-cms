@@ -23,8 +23,7 @@ use yii\helpers\Url;
             <a href="javascript:;"><i class="layui-icon" style="margin-right: 6px;color: #5FB878">&#xe66f;</i>admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
-                <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-                <dd><a href="./login.html">退出</a></dd>
+                <dd><a href="<?= Url::to(['site/logout']) ?>">退出</a></dd>
             </dl>
         </li>
     </ul>
@@ -64,25 +63,19 @@ use yii\helpers\Url;
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
                         </a>
-                    </li >
+                    </li>
                     <li>
                         <a _href="<?= Url::to(['role/index']) ?>">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>
-                    </li >
+                    </li>
                     <li>
-                        <a _href="admin-cate.html">
+                        <a _href="<?= Url::to(['menu/index']) ?>">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
+                            <cite>菜单路由管理</cite>
                         </a>
-                    </li >
-                    <li>
-                        <a _href="admin-rule.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
-                        </a>
-                    </li >
+                    </li>
                 </ul>
             </li>
         </ul>

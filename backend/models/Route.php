@@ -2,23 +2,26 @@
 
 namespace backend\models;
 
+use Yii;
+
 /**
- * This is the model class for table "colin_role".
+ * This is the model class for table "colin_route".
  *
- * @property string $id 用户角色表
- * @property string $name 角色名
- * @property string $description 角色描述
- * @property string $permission 权限
+ * @property string $id 路由表
+ * @property int $submenu_id 子菜单id
+ * @property string $route_name 路由名
+ * @property string $route 路由
+ * @property int $status 状态 1:启用 2:禁用
  * @property int $create_time 创建时间
  */
-class Role extends Base
+class Route extends Base
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'colin_role';
+        return 'colin_route';
     }
 
     /**
@@ -27,10 +30,8 @@ class Role extends Base
     public function rules()
     {
         return [
-            [['create_time'], 'integer'],
-            [['name'], 'string', 'max' => 50],
-            [['description'], 'string', 'max' => 100],
-            [['permission'], 'string', 'max' => 500],
+            [['submenu_id', 'status', 'create_time'], 'integer'],
+            [['route_name', 'route'], 'string', 'max' => 100],
         ];
     }
 
@@ -41,18 +42,20 @@ class Role extends Base
     {
         return [
             'id' => 'ID',
-            'name' => '角色名',
-            'description' => '描述',
-            'permission' => '权限',
+            'submenu_id' => '子菜单 ID',
+            'route_name' => '路由名',
+            'route' => '路由',
+            'status' => '状态',
             'create_time' => '创建时间',
         ];
     }
 
     public function create($data)
     {
-        $this->name = $data['name'];
-        $this->description = $data['description'];
-        $this->permission = json_encode($data['ids']);
+        $this->submenu_id = $data['submenu_id'];
+        $this->route_name = $data['route_name'];
+        $this->route = $data['route'];
+        $this->status = $data['status'];
         $this->create_time = time();
         if (!$this->save()) {
             $error = array_values($this->getFirstErrors())[0];
@@ -64,16 +67,14 @@ class Role extends Base
     public function edit($data)
     {
         $model = self::findOne($data['id']);
-        $model->name = $data['name'];
-        $model->description = $data['description'];
-        $model->permission = json_encode($data['ids']);
-        $model->create_time = time();
+        $model->route_name = $data['route_name'];
+        $model->route = $data['route'];
+        $model->status = $data['status'];
         if (!$model->save()) {
             $error = array_values($model->getFirstErrors())[0];
             return $this->arrData(100, $error);
         }
         return $this->arrData(200, '更新成功');
     }
-
 
 }

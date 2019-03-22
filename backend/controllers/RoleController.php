@@ -7,6 +7,7 @@
 namespace backend\controllers;
 
 use backend\models\Role;
+use backend\models\Submemu;
 use Yii;
 use yii\data\Pagination;
 
@@ -47,12 +48,52 @@ class RoleController extends BaseController
 
     public function actionCreate()
     {
-        return $this->render('create');
+        $submenus = Submemu::find()->joinWith('route')
+            ->where(['is_show' => 1])->orderBy('sort desc')
+            ->asArray()->all();
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if (!isset($post['ids'])) {
+                return $this->json(100, '拥有权限不能为空');
+            }
+            $post['ids'] = array_values($post['ids']);
+            foreach ($post['ids'] as &$val) {
+                $val = (int)$val;
+            }
+            $model = new Role();
+            $res = $model->create($post);
+            if ($res['status'] != 200) {
+                return $this->json(100, $res['msg']);
+            }
+            return $this->json(200, $res['msg']);
+        }
+        return $this->render('create', compact('submenus'));
     }
 
     public function actionUpdate()
     {
-        return $this->render('update');
+        $id = (int)Yii::$app->request->get('id');
+        $role = Role::findOne($id);
+        $submenus = Submemu::find()->joinWith('route')
+            ->where(['is_show' => 1])->orderBy('sort desc')
+            ->asArray()->all();
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if (!isset($post['ids'])) {
+                return $this->json(100, '拥有权限不能为空');
+            }
+            $post['ids'] = array_values($post['ids']);
+            foreach ($post['ids'] as &$val) {
+                $val = (int)$val;
+            }
+            $model = new Role();
+            $res = $model->edit($post);
+            if ($res['status'] != 200) {
+                return $this->json(100, $res['msg']);
+            }
+            return $this->json(200, $res['msg']);
+        }
+        return $this->render('update', compact('submenus', 'role'));
     }
 
     public function actionDel()

@@ -28,8 +28,8 @@ use yii\helpers\Url;
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="batch_del('<?= Url::to(['role/batch-del']) ?>')"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加角色','<?=  Url::to(['role/create']) ?>')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：<?= $pagination->totalCount ?> 条 ( <?= $pagination->getPageCount() ?> 页 )</span>
+        <button class="layui-btn" onclick="x_admin_show('添加','<?=  Url::to(['role/create']) ?>')"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：<span class="count_num"><?= $pagination->totalCount ?></span> 条 ( <?= $pagination->getPageCount() ?> 页 )</span>
     </xblock>
     <table class="layui-table">
         <thead>

@@ -19,6 +19,8 @@ function del(obj, id, url){
             if (res.status === 200) {
                 layer.msg(res.msg, {icon: 1, time: 1500}, function () {
                     $(obj).parents("tr").remove();
+                    $count_num = $('.count_num');
+                    $count_num.text(parseInt($count_num.text()) - 1);
                 })
             } else {
                 layer.msg(res.msg, {icon: 2, time: 1500})
