@@ -51,7 +51,7 @@ insert  into `colin_member`(`id`,`nickname`,`tel`,`password`,`email`,`status`,`c
 (40,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
 (41,'张三','17300000000',NULL,'123456@qq.com',1,1521768073),
 (42,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
-(43,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
+(43,'Colin','17312341234',NULL,'123456@qq.com',2,1521768073),
 (56,'李四2','17812341234','$2y$13$FkGSqk0aX2QSsscvQhQm5.XnGK9EkL8vJb3Z1Niez2MStWcQkeAUW','lisi@qq.com',2,1552446687),
 (57,'TEST','17352902344','$2y$13$s5Na35XAgm3Odq0QzT0uteLFPSWCgJ8PLE95sh1hP/q5JnvhOZWK2','123@qq.com',2,1552446738);
 
@@ -67,7 +67,7 @@ CREATE TABLE `colin_menu` (
   `is_show` tinyint(1) DEFAULT '1' COMMENT '是否显示 1:显示 2:隐藏',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_menu` */
 
@@ -94,7 +94,7 @@ CREATE TABLE `colin_role` (
 
 insert  into `colin_role`(`id`,`name`,`description`,`permission`,`create_time`) values 
 (1,'超级管理员','拥有所有权限','[1,2,3,4,5,6,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,12,13,14,15,16,17,18,19,20,21,22]',1553332917),
-(4,'测试','测试人员权限','[23,24,12,13]',1553308359),
+(4,'测试','测试人员权限','[1,23,12]',1553337992),
 (7,'客服','客服权限','[1,12,13]',1553336925),
 (15,'财务','财务权限','[12,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,1,18]',1553256251);
 
@@ -110,7 +110,7 @@ CREATE TABLE `colin_route` (
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 1:启用 2:禁用',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_route` */
 
@@ -161,7 +161,7 @@ CREATE TABLE `colin_submenu` (
   `is_show` tinyint(1) DEFAULT '1' COMMENT '是否显示 1:显示 2:隐藏',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_submenu` */
 
