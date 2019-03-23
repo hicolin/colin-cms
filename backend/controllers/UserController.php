@@ -37,11 +37,11 @@ class UserController extends BaseController
         }
         if (isset($search['b_time']) && $search['b_time']) {
             $bTime = strtotime($search['b_time'] . ' 00:00:00');
-            $query = $query->andWhere(['>=', 'create_time', $bTime]);
+            $query = $query->andWhere(['>=', 'colin_user.create_time', $bTime]);
         }
         if (isset($search['e_time']) && $search['e_time']) {
             $eTime = strtotime($search['e_time'] . ' 23:59:59');
-            $query = $query->andWhere(['<=', 'create_time', $eTime]);
+            $query = $query->andWhere(['<=', 'colin_user.create_time', $eTime]);
         }
         return $query;
     }

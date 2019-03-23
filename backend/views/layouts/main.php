@@ -21,7 +21,7 @@ AppAsset::register($this);
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <?= Html::csrfMetaTags() ?>
     <link rel="shortcut icon" href="<?= Url::to('@web/favicon.ico') ?>" type="image/x-icon" />
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1102529_t3ihqr67e3.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1102529_22kdtws4r72.css">
     <script type="text/javascript" src="<?= Url::to('@web/js/jquery.min.js') ?>"></script>
     <?php $this->head() ?>
 

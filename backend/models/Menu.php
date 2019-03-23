@@ -85,4 +85,24 @@ class Menu extends Base
         return $this->arrData(200, '更新成功');
     }
 
+    public function getSubmenu()
+    {
+        $userSubmenuIdArr = $this->getUserSubmenuIdArr();
+        return $this->hasMany(Submenu::className(), ['menu_id' => 'id'])
+            ->where(['colin_submenu.is_show' => 1])
+            ->andWhere(['in', 'colin_submenu.id', $userSubmenuIdArr])
+            ->orderBy('colin_submenu.sort desc');
+    }
+
+    public function getUserSubmenuIdArr()
+    {
+        $user = User::findOne(Yii::$app->user->getId());
+        $role = Role::findOne($user->role_id);
+        $permission = json_decode($role->permission);
+        $routes = Route::find()->where(['in', 'id', $permission])->asArray()->all();
+        $submenuIdArr = array_column($routes, 'submenu_id');
+        $submenuIdArr = array_unique($submenuIdArr);
+        return $submenuIdArr;
+    }
+
 }

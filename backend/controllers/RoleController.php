@@ -7,7 +7,7 @@
 namespace backend\controllers;
 
 use backend\models\Role;
-use backend\models\Submemu;
+use backend\models\Submenu;
 use Yii;
 use yii\data\Pagination;
 
@@ -48,7 +48,7 @@ class RoleController extends BaseController
 
     public function actionCreate()
     {
-        $submenus = Submemu::find()->joinWith('route')
+        $submenus = Submenu::find()->joinWith('route')
             ->where(['is_show' => 1])->orderBy('sort desc')
             ->asArray()->all();
         if (Yii::$app->request->isPost) {
@@ -74,7 +74,7 @@ class RoleController extends BaseController
     {
         $id = (int)Yii::$app->request->get('id');
         $role = Role::findOne($id);
-        $submenus = Submemu::find()->joinWith('route')
+        $submenus = Submenu::find()->joinWith('route')
             ->where(['is_show' => 1])->orderBy('sort desc')
             ->asArray()->all();
         if (Yii::$app->request->isPost) {

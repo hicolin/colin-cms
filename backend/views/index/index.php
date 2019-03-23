@@ -18,9 +18,9 @@ use yii\helpers\Url;
         </li>
     </ul>
     <ul class="layui-nav right" lay-filter="">
-        <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
+        <li class="layui-nav-item to-index"><a href="javascript:;" title="清楚缓存" onclick="clear_cache()"><i class="iconfont iconqingchuhuancun" style="color: #00AA88"></i></a></li>
         <li class="layui-nav-item">
-            <a href="javascript:;"><i class="layui-icon" style="margin-right: 6px;color: #5FB878">&#xe66f;</i>admin</a>
+            <a href="javascript:;"><i class="layui-icon" style="margin-right: 6px;color: #5FB878">&#xe66f;</i><?= Yii::$app->user->identity->name ?></a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
                 <dd><a href="<?= Url::to(['site/logout']) ?>">退出</a></dd>
@@ -36,48 +36,25 @@ use yii\helpers\Url;
 <div class="left-nav">
     <div id="side-nav">
         <ul id="nav">
+            <?php foreach ($menu as $list): ?>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>会员管理</cite>
+                    <i class="iconfont"><?= $list['icon'] ?></i>
+                    <cite><?= $list['name'] ?></cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
+                    <?php foreach ($list['submenu'] as $item): ?>
                     <li>
-                        <a _href="<?= Url::to(['member/index']) ?>">
+                        <a _href="<?= Url::to([$item['route']]) ?>">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
+                            <cite><?= $item['route_name'] ?></cite>
                         </a>
                     </li>
+                    <?php endforeach; ?>
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="<?= Url::to(['user/index']) ?>">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="<?= Url::to(['role/index']) ?>">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>角色管理</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="<?= Url::to(['menu/index']) ?>">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>菜单路由管理</cite>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>
@@ -104,3 +81,21 @@ use yii\helpers\Url;
 <div class="footer">
     <div class="copyright">Copyright ©<?= date('Y') ?> Colin CMS All Rights Reserved</div>
 </div>
+
+<?php $this->beginBlock('footer') ?>
+<script>
+    function clear_cache() {
+        layer.load(3);
+        $.post('<?= Url::to(['index/clear-cache']) ?>',{id: 1} , function (res) {
+            layer.closeAll();
+            if (res.status === 200) {
+                layer.msg(res.msg, {icon: 1,time: 1500}, function () {
+                    location.reload();
+                })
+            } else {
+                layer.msg(res.msg, {icon: 2, time: 1500})
+            }
+        }, 'json');
+    }
+</script>
+<?php $this->endBlock() ?>

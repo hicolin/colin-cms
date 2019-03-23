@@ -8,7 +8,7 @@ namespace backend\controllers;
 
 use backend\models\Menu;
 use backend\models\Route;
-use backend\models\Submemu;
+use backend\models\Submenu;
 use Yii;
 use yii\data\Pagination;
 
@@ -81,6 +81,10 @@ class MenuController extends BaseController
     public function actionDel()
     {
         $id = (int)Yii::$app->request->get('id');
+        $submenu = Submenu::findOne(['menu_id' => $id]);
+        if ($submenu) {
+            return $this->json(100, '含有子菜单，禁止删除');
+        }
         $model = Menu::findOne($id);
         $res = $model->delete();
         if (!$res) {
@@ -92,6 +96,12 @@ class MenuController extends BaseController
     public function actionBatchDel()
     {
         $idArr = Yii::$app->request->get('idArr');
+        foreach ($idArr as $id) {
+            $submenu = Submenu::findOne(['menu_id' => $id]);
+            if ($submenu) {
+                return $this->json(100, '含有子菜单，禁止删除');
+            }
+        }
         $res = Menu::deleteAll(['in', 'id', $idArr]);
         if (!$res) {
             return $this->json(100, '批量删除失败');
@@ -102,7 +112,7 @@ class MenuController extends BaseController
     public function actionSubmenu()
     {
         $id = (int)Yii::$app->request->get('id');
-        $query = Submemu::find()->where(['menu_id' => $id]);
+        $query = Submenu::find()->where(['menu_id' => $id]);
         $models = $query->all();
         $count = $query->count();
         return $this->render('submenu', compact('models', 'count', 'id'));
@@ -113,7 +123,7 @@ class MenuController extends BaseController
         $menuId = Yii::$app->request->get('menu_id');
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $model = new Submemu();
+            $model = new Submenu();
             $res = $model->create($post);
             if ($res['status'] != 200) {
                 return $this->json(100, $res['msg']);
@@ -126,10 +136,10 @@ class MenuController extends BaseController
     public function actionSubmenuUpdate()
     {
         $id = Yii::$app->request->get('id');
-        $model = Submemu::findOne($id);
+        $model = Submenu::findOne($id);
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $model = new Submemu();
+            $model = new Submenu();
             $res = $model->edit($post);
             if ($res['status'] != 200) {
                 return $this->json(100, $res['msg']);
@@ -142,7 +152,11 @@ class MenuController extends BaseController
     public function actionSubmenuDel()
     {
         $id = (int)Yii::$app->request->get('id');
-        $model = Submemu::findOne($id);
+        $route = Route::findOne(['submenu_id' => $id]);
+        if ($route) {
+            return $this->json(100, '含有子路由，禁止删除');
+        }
+        $model = Submenu::findOne($id);
         $res = $model->delete();
         if (!$res) {
             return $this->json(100, '删除失败');
@@ -153,7 +167,13 @@ class MenuController extends BaseController
     public function actionSubmenuBatchDel()
     {
         $idArr = Yii::$app->request->get('idArr');
-        $res = Submemu::deleteAll(['in', 'id', $idArr]);
+        foreach ($idArr as $id) {
+            $route = Route::findOne(['submenu_id' => $id]);
+            if ($route) {
+                return $this->json(100, '含有子路由，禁止删除');
+            }
+        }
+        $res = Submenu::deleteAll(['in', 'id', $idArr]);
         if (!$res) {
             return $this->json(100, '批量删除失败');
         }

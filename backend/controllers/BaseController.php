@@ -7,6 +7,9 @@
 namespace backend\controllers;
 
 
+use backend\models\Role;
+use backend\models\Route;
+use backend\models\User;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use Yii;
@@ -15,7 +18,18 @@ class BaseController extends Controller
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect(['site/login']);
+            $this->redirect(['site/login']);
+            return false;
+        }
+        $user = User::findOne(Yii::$app->user->getId());
+        $role = Role::findOne(['id' => $user->role_id]);
+        $permission = json_decode($role->permission);
+        $routes = Route::find()->where(['in', 'id', $permission])->asArray()->all();
+        $routeArr = array_column($routes, 'route');
+        $allowUrl = ['index/index', 'index/welcome', 'index/clear-cache'];
+        if (!in_array($this->route, $allowUrl)  && !in_array($this->route, $routeArr)) {
+            echo $this->json(100, '抱歉，没有权限');
+            return false;
         }
         return parent::beforeAction($action);
     }
@@ -30,9 +44,9 @@ class BaseController extends Controller
     public function json($status, $msg, $data = '')
     {
         if ($data) {
-            return json_encode(['status' => $status, 'msg' => $msg, 'data' => $data]);
+            return json_encode(['status' => $status, 'msg' => $msg, 'data' => $data], JSON_UNESCAPED_UNICODE);
         } else {
-            return json_encode(['status' => $status, 'msg' => $msg]);
+            return json_encode(['status' => $status, 'msg' => $msg], JSON_UNESCAPED_UNICODE);
         }
     }
 

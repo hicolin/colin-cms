@@ -15,14 +15,14 @@ use Yii;
  * @property int $is_show 是否显示 1:显示 2:隐藏
  * @property int $create_time 创建时间
  */
-class Submemu extends Base
+class Submenu extends Base
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'colin_submemu';
+        return 'colin_submenu';
     }
 
     /**

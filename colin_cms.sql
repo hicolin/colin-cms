@@ -25,7 +25,7 @@ CREATE TABLE `colin_member` (
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 1:启用 2:禁用',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_member` */
 
@@ -49,10 +49,10 @@ insert  into `colin_member`(`id`,`nickname`,`tel`,`password`,`email`,`status`,`c
 (37,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
 (38,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
 (40,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
-(41,'张三','17300000000',NULL,'123456@qq.com',2,1521768073),
+(41,'张三','17300000000',NULL,'123456@qq.com',1,1521768073),
 (42,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
 (43,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
-(56,'李四2','17812341234','$2y$13$FkGSqk0aX2QSsscvQhQm5.XnGK9EkL8vJb3Z1Niez2MStWcQkeAUW','lisi@qq.com',1,1552446687),
+(56,'李四2','17812341234','$2y$13$FkGSqk0aX2QSsscvQhQm5.XnGK9EkL8vJb3Z1Niez2MStWcQkeAUW','lisi@qq.com',2,1552446687),
 (57,'TEST','17352902344','$2y$13$s5Na35XAgm3Odq0QzT0uteLFPSWCgJ8PLE95sh1hP/q5JnvhOZWK2','123@qq.com',2,1552446738);
 
 /*Table structure for table `colin_menu` */
@@ -67,14 +67,14 @@ CREATE TABLE `colin_menu` (
   `is_show` tinyint(1) DEFAULT '1' COMMENT '是否显示 1:显示 2:隐藏',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_menu` */
 
 insert  into `colin_menu`(`id`,`name`,`icon`,`sort`,`is_show`,`create_time`) values 
-(1,'会员管理','&#xe6b8;',10,1,1521768073),
+(1,'会员管理','&#xe6b8;',12,1,1521768073),
 (2,'管理员管理','&#xe726;',10,1,1521768073),
-(3,'日志管理','&#xe6a2;',10,1,1521768073),
+(3,'日志管理','',10,1,1521768073),
 (4,'系统设置','&#xe6ae;',10,1,1521768073);
 
 /*Table structure for table `colin_role` */
@@ -88,14 +88,14 @@ CREATE TABLE `colin_role` (
   `permission` varchar(500) DEFAULT NULL COMMENT '权限',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_role` */
 
 insert  into `colin_role`(`id`,`name`,`description`,`permission`,`create_time`) values 
-(1,'超级管理员','拥有所有权限','[12,13,14,15,16,17,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,1,2,3,4,5,6,18,19,20,21,22]',1553256220),
-(4,'测试','测试人员权限','[12,13,23,24,1,18]',1521768073),
-(7,'客服','客服权限','[12,13,23,24,1,18]',1521768073),
+(1,'超级管理员','拥有所有权限','[1,2,3,4,5,6,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,12,13,14,15,16,17,18,19,20,21,22]',1553332917),
+(4,'测试','测试人员权限','[23,24,12,13]',1553308359),
+(7,'客服','客服权限','[1,12,13]',1553336925),
 (15,'财务','财务权限','[12,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,1,18]',1553256251);
 
 /*Table structure for table `colin_route` */
@@ -110,7 +110,7 @@ CREATE TABLE `colin_route` (
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 1:启用 2:禁用',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_route` */
 
@@ -148,11 +148,11 @@ insert  into `colin_route`(`id`,`submenu_id`,`route_name`,`route`,`status`,`crea
 (36,4,'路由添加','menu/route-create',1,1553246558),
 (37,4,'路由编辑','menu/route-update',1,1553246585);
 
-/*Table structure for table `colin_submemu` */
+/*Table structure for table `colin_submenu` */
 
-DROP TABLE IF EXISTS `colin_submemu`;
+DROP TABLE IF EXISTS `colin_submenu`;
 
-CREATE TABLE `colin_submemu` (
+CREATE TABLE `colin_submenu` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '子菜单表',
   `menu_id` int(11) DEFAULT NULL COMMENT '主菜单id',
   `route_name` varchar(100) DEFAULT NULL COMMENT '路由名',
@@ -161,11 +161,11 @@ CREATE TABLE `colin_submemu` (
   `is_show` tinyint(1) DEFAULT '1' COMMENT '是否显示 1:显示 2:隐藏',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-/*Data for the table `colin_submemu` */
+/*Data for the table `colin_submenu` */
 
-insert  into `colin_submemu`(`id`,`menu_id`,`route_name`,`route`,`sort`,`is_show`,`create_time`) values 
+insert  into `colin_submenu`(`id`,`menu_id`,`route_name`,`route`,`sort`,`is_show`,`create_time`) values 
 (1,1,'会员管理','member/index',10,1,1521768073),
 (2,2,'管理员管理','user/index',10,1,1521768073),
 (3,2,'角色管理','role/index',10,1,1521768073),
@@ -183,13 +183,14 @@ CREATE TABLE `colin_user` (
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 1:启用 2:禁用',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_user` */
 
 insert  into `colin_user`(`id`,`role_id`,`name`,`password`,`status`,`create_time`) values 
 (1,1,'admin','$2y$13$Ln878YXekD23XBX8Xexyse3ys8dFBJRJf3CV5hoB3Uz.CDXgmYIn2',1,1521768073),
-(6,7,'test','$2y$13$Ln878YXekD23XBX8Xexyse3ys8dFBJRJf3CV5hoB3Uz.CDXgmYIn2',1,1521768073);
+(6,4,'test','$2y$13$Ln878YXekD23XBX8Xexyse3ys8dFBJRJf3CV5hoB3Uz.CDXgmYIn2',1,1521768073),
+(7,7,'kefu','$2y$13$ZQWkdDxAeC7V0GxFisl3MOAXPcD3p9IIMeK3uwrG3vzRIeCK2dSui',1,1553323404);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
