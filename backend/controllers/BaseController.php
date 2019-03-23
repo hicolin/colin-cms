@@ -25,9 +25,9 @@ class BaseController extends Controller
         $role = Role::findOne(['id' => $user->role_id]);
         $permission = json_decode($role->permission);
         $routes = Route::find()->where(['in', 'id', $permission])->asArray()->all();
-        $routeArr = array_column($routes, 'route');
+        $permissionArr = array_column($routes, 'route');
         $allowUrl = ['index/index', 'index/welcome', 'index/clear-cache'];
-        if (!in_array($this->route, $allowUrl)  && !in_array($this->route, $routeArr)) {
+        if (!in_array($this->route, $allowUrl)  && !in_array($this->route, $permissionArr)) {
             echo $this->json(100, '抱歉，没有权限');
             return false;
         }
