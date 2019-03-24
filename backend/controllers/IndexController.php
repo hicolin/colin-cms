@@ -38,6 +38,10 @@ class IndexController extends BaseController
         return $this->json(200, '清除成功');
     }
 
+    /**
+     * 获取权限菜单（并存入缓存）
+     * @return array|mixed|\yii\db\ActiveRecord[]
+     */
     public function getMenu()
     {
         $user = User::findOne(Yii::$app->user->getId());

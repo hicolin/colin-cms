@@ -104,6 +104,9 @@ class UserController extends BaseController
         if ($id == 1) {
             return $this->json(100, 'admin禁止删除');
         }
+        if ($id = Yii::$app->user->getId()) {
+            return $this->json(100, '不能删除自身');
+        }
         $model = User::findOne($id);
         $res = $model->delete();
         if (!$res) {
@@ -117,6 +120,9 @@ class UserController extends BaseController
         $idArr = Yii::$app->request->get('idArr');
         if (in_array(1, $idArr)) {
             return $this->json(100, 'admin禁止删除');
+        }
+        if (in_array(Yii::$app->user->getId(), $idArr)) {
+            return $this->json(100, '不能删除自身');
         }
         $res = User::deleteAll(['in', 'id', $idArr]);
         if (!$res) {

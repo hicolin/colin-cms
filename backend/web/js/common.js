@@ -23,7 +23,7 @@ function del(obj, id, url){
                     $count_num.text(parseInt($count_num.text()) - 1);
                 })
             } else {
-                layer.msg(res.msg, {icon: 2, time: 1500})
+                layer.msg(res.msg, {icon: 2, time: 2000})
             }
         }, 'json');
     });
@@ -42,7 +42,7 @@ function batch_del (url) {
                     location.reload();
                 })
             } else {
-                layer.msg(res.msg, {icon: 2, time: 1500})
+                layer.msg(res.msg, {icon: 2, time: 2000})
             }
         }, 'json')
     });

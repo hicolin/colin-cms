@@ -18,7 +18,7 @@ use yii\helpers\Url;
         </li>
     </ul>
     <ul class="layui-nav right" lay-filter="">
-        <li class="layui-nav-item to-index"><a href="javascript:;" title="清楚缓存" onclick="clear_cache()"><i class="iconfont iconqingchuhuancun" style="color: #00AA88"></i></a></li>
+        <li class="layui-nav-item to-index"><a href="javascript:;" title="清除缓存" onclick="clear_cache()"><i class="iconfont iconqingchuhuancun" style="color: #00AA88"></i></a></li>
         <li class="layui-nav-item">
             <a href="javascript:;"><i class="layui-icon" style="margin-right: 6px;color: #5FB878">&#xe66f;</i><?= Yii::$app->user->identity->name ?></a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->

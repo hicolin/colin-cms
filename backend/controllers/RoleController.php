@@ -8,6 +8,7 @@ namespace backend\controllers;
 
 use backend\models\Role;
 use backend\models\Submenu;
+use backend\models\User;
 use Yii;
 use yii\data\Pagination;
 
@@ -102,6 +103,14 @@ class RoleController extends BaseController
         if ($id == 1) {
             return $this->json(100, '超级管理员不能删除');
         }
+        $user = User::findOne(Yii::$app->user->getId());
+        if ($id == $user->role_id) {
+            return $this->json(100, '不能删除自身所属的角色');
+        }
+        $model = User::findOne(['role_id' => $id]);
+        if ($model) {
+            return $this->json(100, '该角色下含有用户，不能删除');
+        }
         $model = Role::findOne($id);
         $res = $model->delete();
         if (!$res) {
@@ -115,6 +124,16 @@ class RoleController extends BaseController
         $idArr = Yii::$app->request->get('idArr');
         if (in_array(1, $idArr)) {
             return $this->json(100, '超级管理员不能删除');
+        }
+        $user = User::findOne(Yii::$app->user->getId());
+        if (in_array($user->role_id, $idArr)) {
+            return $this->json(100, '不能删除自身所属的角色');
+        }
+        foreach ($idArr as $id) {
+            $model = User::findOne(['role_id' => $id]);
+            if ($model) {
+                return $this->json(100, '该角色下含有用户，不能删除');
+            }
         }
         $res = Role::deleteAll(['in', 'id', $idArr]);
         if (!$res) {

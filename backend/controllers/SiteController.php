@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\LoginLog;
 use backend\models\User;
 use Yii;
 use yii\web\Controller;
@@ -27,6 +28,8 @@ class SiteController extends Controller
                 return $this->json(100, '该用户已被禁用，请联系管理员');
             }
             Yii::$app->user->login($user);
+            $loginLog = new LoginLog();
+            $loginLog->create($user->id);
             return $this->json(200, '登录成功');
         }
         return $this->render('login');

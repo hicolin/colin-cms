@@ -27,7 +27,7 @@ use yii\helpers\Url;
                     layer.closeAll();
                     if (res.status === 200) {
                         layer.msg(res.msg, {icon: 1,time: 1500}, function () {
-                            location.href = '<?= Url::to(['index/index']) ?>';
+                            location.href = '<?= Url::to(['/']) ?>';
                         })
                     } else {
                         layer.msg(res.msg, {icon: 2})
