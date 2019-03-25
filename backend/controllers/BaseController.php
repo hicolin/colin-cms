@@ -7,6 +7,7 @@
 namespace backend\controllers;
 
 
+use backend\models\OperateLog;
 use backend\models\Role;
 use backend\models\Route;
 use backend\models\User;
@@ -30,6 +31,13 @@ class BaseController extends Controller
         if (!in_array($this->route, $allowUrl)  && !in_array($this->route, $permissionArr)) {
             echo $this->json(100, '抱歉，没有权限');
             return false;
+        }
+        $allowRoute = ['menu/route', 'menu/submenu'];
+        if (!in_array($this->action->id, ['index', 'view']) && !in_array($this->route, $allowUrl) && !in_array($this->route,
+                $allowRoute)) {
+            $route = Route::findOne(['route' => $this->route]);
+            $operateLog = new OperateLog();
+            $operateLog->create(Yii::$app->user->getId(), $route->route_name, $this->route, $_REQUEST);
         }
         return parent::beforeAction($action);
     }
