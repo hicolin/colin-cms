@@ -22,7 +22,7 @@ use yii\helpers\Url;
         <li class="layui-nav-item">
             <a href="javascript:;"><i class="layui-icon" style="margin-right: 6px;color: #5FB878">&#xe66f;</i><?= Yii::$app->user->identity->name ?></a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                <dd><a onclick="x_admin_show('个人信息', '<?= Url::to(['user/update', 'id' => Yii::$app->user->getId()]) ?>')">个人信息</a></dd>
                 <dd><a href="<?= Url::to(['site/logout']) ?>">退出</a></dd>
             </dl>
         </li>
