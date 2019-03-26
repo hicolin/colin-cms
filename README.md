@@ -42,4 +42,4 @@ Xadmin + Yii2
 http://cms.hicolin.cn (敬请期待)
 
 #### 开发者寄语
-如果你觉得该软件对您有所帮助的话，请给个![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/220130_6909f0b2_1804453.png "屏幕截图.png")Star。
+如果你觉得该软件对您有所帮助的话，请给个 ☆Star。 （づ￣3￣）づ╭❤～
