@@ -37,3 +37,9 @@ Xadmin + Yii2
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/215551_34320f61_1804453.png "log.png")
 8. 系统设置
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/215648_8d79791e_1804453.png "sys.png")
+
+#### 演示地址
+http://cms.hicolin.cn (敬请期待)
+
+#### 开发者寄语
+如果你觉得该软件对您有所帮助的话，请给个![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/220130_6909f0b2_1804453.png "屏幕截图.png")Star。
