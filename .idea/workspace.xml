@@ -317,7 +317,7 @@
       <path value="$PROJECT_DIR$/vendor/yiisoft/yii2" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="466" />
     <option name="y" value="8" />
     <option name="width" value="1400" />
