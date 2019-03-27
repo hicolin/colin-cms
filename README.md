@@ -39,7 +39,7 @@ Xadmin + Yii2
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/215648_8d79791e_1804453.png "sys.png")
 
 #### 演示地址
-http://cms.hicolin.cn (敬请期待)
+http://cms.hicolin.cn  测试账户： test  123456
 
 #### 开发者寄语
 如果你觉得该软件对您有所帮助的话，请给个 ☆Star! （づ￣3￣）づ╭❤～
