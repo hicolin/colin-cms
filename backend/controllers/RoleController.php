@@ -76,7 +76,7 @@ class RoleController extends BaseController
         $id = (int)Yii::$app->request->get('id');
         $role = Role::findOne($id);
         $submenus = Submenu::find()->joinWith('route')
-            ->where(['is_show' => 1])->orderBy('sort desc')
+            ->where(['is_show' => 1])->orderBy('sort desc, id desc')
             ->asArray()->all();
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
