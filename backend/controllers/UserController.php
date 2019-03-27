@@ -104,7 +104,7 @@ class UserController extends BaseController
         if ($id == 1) {
             return $this->json(100, 'admin禁止删除');
         }
-        if ($id = Yii::$app->user->getId()) {
+        if ($id == Yii::$app->user->getId()) {
             return $this->json(100, '不能删除自身');
         }
         $model = User::findOne($id);
