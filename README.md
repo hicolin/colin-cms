@@ -43,3 +43,5 @@ X-admin + Yii2
 
 #### 演示地址
 http://cms.hicolin.cn   测试账户： test  123456
+
+特别感谢X-admin, Yii2。
