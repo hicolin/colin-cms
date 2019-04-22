@@ -112,5 +112,29 @@ class MemberController extends BaseController
         }
         return $this->json(200, '批量删除成功');
     }
+
+    public function actionExport()
+    {
+        $search = Yii::$app->request->get('search');
+        $query = Member::find();
+        $query = $this->condition($query, $search);
+        $data = $query->all();
+        $header = ['ID', '昵称', '手机号码', '邮箱', '创建时间', '状态'];
+        $list[] = implode(',', $header);
+        if ($data) {
+            foreach ($data as $val) {
+                $item = [
+                    $val->id,
+                    $val->nickname,
+                    $val->tel,
+                    $val->email,
+                    date('Y-m-d H:i:s', $val->create_time),
+                    $val->status == 1 ? '启用' : '禁用',
+                ];
+                $list[] = implode(',', $item);
+            }
+        }
+        return $this->csvExport($list, '用户列表');
+    }
     
 }

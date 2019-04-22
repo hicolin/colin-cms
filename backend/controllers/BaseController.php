@@ -70,6 +70,23 @@ class BaseController extends Controller
     }
 
     /**
+     * CSV文件导出
+     * @param $data
+     * @param string $name
+     */
+    public function csvExport($data, $name = '')
+    {
+        $csvFileName = $name ? $name . '.csv' : date('YmdHis') . rand(111111, 999999) . '.csv';
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+        header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
+        header('Expires: Mon,26 Jul 1997 05:00:00 GMT');
+        header('Content-Transfer-Encoding: binary');
+        echo implode("\r\n", $data);
+        exit;
+    }
+
+    /**
      * 调试函数（支持语法高亮）
      */
     public function dd(){

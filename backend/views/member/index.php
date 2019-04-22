@@ -32,6 +32,7 @@ use yii\helpers\Url;
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="batch_del('<?= Url::to([$this->context->id . '/batch-del']) ?>')"><i class="layui-icon"></i>批量删除</button>
+        <a class="layui-btn" href="<?= Url::to([$this->context->id . '/export', 'search' => $search]) ?>"><i class="layui-icon" style="font-size: 15px;opacity: .8">&#xe62f;</i>导出</a>
         <button class="layui-btn" onclick="x_admin_show('添加用户','<?=  Url::to([$this->context->id . '/create']) ?>')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：<span class="count_num"><?= $pagination->totalCount ?></span> 条 ( <?= $pagination->getPageCount() ?> 页 )</span>
     </xblock>
