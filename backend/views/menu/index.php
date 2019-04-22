@@ -77,15 +77,9 @@ use yii\helpers\Url;
     <?php if (empty($models)): ?>
         <p class="text-empty">-- 暂无数据 --</p>
     <?php endif; ?>
-    <div class="page">
-            <?= \yii\widgets\LinkPager::widget([
-                'pagination' => $pagination,
-                'nextPageLabel' => '&gt;&gt;',
-                'prevPageLabel' => '&lt;&lt;',
-                'firstPageLabel' => '首页',
-                'lastPageLabel' => '尾页',
-            ]); ?>
-    </div>
+
+    <?= $this->render('@app/views/layouts/pagination', compact('pagination')) ?>
+
 </div>
 
 <?php $this->beginBlock('footer') ?>

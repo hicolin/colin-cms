@@ -59,13 +59,6 @@ class IndexController extends BaseController
             ->andWhere(['in', 'colin_menu.id', $menuIdArr])
             ->orderBy('colin_menu.sort desc')
             ->asArray()->all();
-//        foreach ($menu as $k => $list){
-//            foreach ($list['submenu'] as $j => $item) {
-//                $menu[$k]['submenu'][$j]['rule'] = Route::find()->where(['submenu_id' => $item['id']])
-//                    ->andWhere(['in', 'id', $permission])
-//                    ->asArray()->all();
-//            }
-//        }
         foreach ($menu as &$list) {
             foreach ($list['submenu'] as &$item) {
                 $item['rule'] = Route::find()->where(['submenu_id' => $item['id']])
