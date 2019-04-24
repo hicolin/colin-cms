@@ -36,6 +36,26 @@ class Template extends BaseController
     }
 
     /**
+     * 文件上传
+     * @return string
+     */
+    public function actionUploadFile()
+    {
+        $model = new UploadForm();
+        $model->csvFile = UploadedFile::getInstanceByName('file');
+        $pathInfo = pathinfo($model->csvFile->name);
+        if ($pathInfo['extension'] != 'csv') {
+            return $this->json(100, '请上传CSV格式的文件');
+        }
+        $res = $model->upload('csv');
+        if ($res['status'] == 100) {
+            return $this->json(100, $res['msg']);
+        }
+        return $this->json(200, '上传成功', $res['path']);
+    }
+
+
+    /**
      * CSV文件导入并获取数据
      * @return string
      * @throws \yii\db\Exception
@@ -90,7 +110,7 @@ class Template extends BaseController
      * @param $data
      * @param string $name
      */
-    public static function csvExport($data, $name = '')
+    public function csvExport($data, $name = '')
     {
         $csvFileName = $name ? $name . '.csv' : date('YmdHis') . rand(111111, 999999) . '.csv';
         header('Content-Type: application/octet-stream');
