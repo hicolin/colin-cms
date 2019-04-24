@@ -150,5 +150,10 @@ class Template extends BaseController
         }
     }
 
+    public function handleTimeConsumeTak()
+    {
+        
+    }
+
 
 }
