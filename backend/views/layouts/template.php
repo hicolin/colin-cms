@@ -15,6 +15,9 @@ use yii\helpers\Url;
 
 <?= $this->render('footer') ?>
 
+// pagination
+<?= $this->render('@app/views/layouts/pagination', compact('pagination')) ?>
+
 // css
 <?php $this->beginBlock('header') ?>
 <style>
