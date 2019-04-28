@@ -376,5 +376,90 @@ class Helper
         return $array_data;
     }
 
+    /**
+     * 导出excel格式表
+     * @param $filename
+     * @param $title
+     * @param $data
+     */
+    public static function exportExcelData($filename, $title, $data)
+    {
+        header("Content-type: application/vnd.ms-excel");
+        header("Content-disposition: attachment; filename=" . $filename . ".xls");
+        if (is_array($title)) {
+            foreach ($title as $key => $value) {
+                echo $value . "\t";
+            }
+        }
+        echo "\n";
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                foreach ($value as $_key => $_value) {
+                    echo $_value . "\t";
+                }
+                echo "\n";
+            }
+        }
+    }
+
+    /**
+     * 导出csv格式表
+     * @param $filename
+     * @param $title
+     * @param $data
+     */
+    public static function exportCsvData($filename, $title, $data)
+    {
+        header("Content-type: application/vnd.ms-excel");
+        header("Content-disposition: attachment; filename=" . $filename . ".csv");
+        if (is_array($title)) {
+            foreach ($title as $key => $value) {
+                echo $value . ",";
+            }
+        }
+        echo "\n";
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                foreach ($value as $_key => $_value) {
+                    echo $_value . ",";
+                }
+                echo "\n";
+            }
+        }
+    }
+
+    /**
+     * 校验身份证号码
+     * @param $number
+     * @return bool
+     */
+    public static function isIdCard($number)
+    {
+        //加权因子
+        $wi = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+        //校验码串
+        $ai = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+        //按顺序循环处理前17位
+        $sigma = 0;
+        for ($i = 0; $i < 17; $i++) {
+            //提取前17位的其中一位，并将变量类型转为实数
+            $b = (int)$number{$i};
+            //提取相应的加权因子
+            $w = $wi[$i];
+            //把从身份证号码中提取的一位数字和加权因子相乘，并累加
+            $sigma += $b * $w;
+        }
+        //计算序号
+        $snumber = $sigma % 11;
+        //按照序号从校验码串中提取相应的字符。
+        $check_number = $ai[$snumber];
+        if ($number{17} == $check_number) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 }
