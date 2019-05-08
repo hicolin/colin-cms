@@ -7,7 +7,7 @@
 namespace backend\libs;
 
 /**
- * 部分插件，没有下载。使用时，请使用composer下载
+ * 部分插件、类库，没有下载。使用时，请使用composer下载。
  */
 use backend\controllers\BaseController;
 use common\models\UploadForm;
@@ -206,6 +206,7 @@ class Template extends BaseController
     }
 
     /**
+     * 验证码
      * @return string
      */
     public function actionCaptcha()
@@ -213,7 +214,7 @@ class Template extends BaseController
 //        header('Content-type: image/jpeg');
 //        CaptchaBuilder::create()->build()->output();
 //        exit;
-        ob_clean();
+//        ob_clean();
         $phraseBuilder = new PhraseBuilder(4, '0123456789');
         $builder = new CaptchaBuilder(null, $phraseBuilder);
         $builder->build(90, 35);

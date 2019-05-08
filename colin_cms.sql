@@ -20,22 +20,26 @@ CREATE TABLE `colin_login_log` (
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `ip` varchar(20) DEFAULT NULL COMMENT 'ip地址',
   `address` varchar(100) DEFAULT NULL COMMENT '位置',
+  `browser` varchar(100) DEFAULT NULL COMMENT '浏览器',
+  `os` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_login_log` */
 
-insert  into `colin_login_log`(`id`,`user_id`,`ip`,`address`,`create_time`) values 
-(9,1,'127.0.0.1','北京市 北京市',1553440309),
-(10,6,'127.0.0.1','北京市 北京市',1553440394),
-(11,1,'127.0.0.1','北京市 北京市',1553440915),
-(12,1,'127.0.0.1','北京市 北京市',1553440996),
-(13,1,'127.0.0.1','安徽省 合肥市',1553441073),
-(14,6,'127.0.0.1','安徽省 合肥市',1553441107),
-(15,1,'127.0.0.1','北京市 北京市',1553559638),
-(16,1,'127.0.0.1','北京市 北京市',1553590599),
-(17,1,'::1','北京市 北京市',1555926498);
+insert  into `colin_login_log`(`id`,`user_id`,`ip`,`address`,`browser`,`os`,`create_time`) values 
+(9,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553440309),
+(10,6,'127.0.0.1','北京市 北京市',NULL,NULL,1553440394),
+(11,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553440915),
+(12,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553440996),
+(13,1,'127.0.0.1','安徽省 合肥市',NULL,NULL,1553441073),
+(14,6,'127.0.0.1','安徽省 合肥市',NULL,NULL,1553441107),
+(15,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553559638),
+(16,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553590599),
+(17,1,'::1','北京市 北京市',NULL,NULL,1555926498),
+(18,1,'::1','北京市 北京市',NULL,NULL,1557297906),
+(19,1,'::1','北京市 北京市','Chrome(74.0.3729.131)','Windows 7',1557298406);
 
 /*Table structure for table `colin_member` */
 
@@ -115,7 +119,7 @@ CREATE TABLE `colin_operate_log` (
   `param` text COMMENT '参数',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_operate_log` */
 
@@ -269,7 +273,8 @@ insert  into `colin_operate_log`(`id`,`user_id`,`route_name`,`route`,`param`,`cr
 (151,1,'数据导出','member/export','[]',1555931185),
 (152,1,'数据导出','member/export','[]',1555931218),
 (153,1,'数据导出','member/export','{\"search\":{\"nickname\":\"test\",\"tel\":\"\",\"b_time\":\"\",\"e_time\":\"\"}}',1555931276),
-(154,1,'数据导出','member/export','{\"search\":{\"nickname\":\"test\",\"tel\":\"\",\"b_time\":\"\",\"e_time\":\"\"}}',1555931338);
+(154,1,'数据导出','member/export','{\"search\":{\"nickname\":\"test\",\"tel\":\"\",\"b_time\":\"\",\"e_time\":\"\"}}',1555931338),
+(155,1,'数据导出','member/export','[]',1557297926);
 
 /*Table structure for table `colin_role` */
 

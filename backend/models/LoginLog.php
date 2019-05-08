@@ -12,6 +12,8 @@ use Yii;
  * @property int $user_id 用户id
  * @property string $ip ip地址
  * @property string $address 位置
+ * @property string $browser 浏览器
+ * @property string $os 操作系统
  * @property int $create_time 创建时间
  */
 class LoginLog extends Base
@@ -33,6 +35,8 @@ class LoginLog extends Base
             [['user_id', 'create_time'], 'integer'],
             [['ip'], 'string', 'max' => 20],
             [['address'], 'string', 'max' => 100],
+            [['browser'], 'string', 'max' => 100],
+            [['os'], 'string', 'max' => 50],
         ];
     }
 
@@ -46,6 +50,8 @@ class LoginLog extends Base
             'user_id' => '用户ID',
             'ip' => 'IP地址',
             'address' => '位置',
+            'browser' => '浏览器',
+            'os' => '操作系统',
             'create_time' => '创建时间',
         ];
     }
@@ -61,6 +67,8 @@ class LoginLog extends Base
         $this->ip = Yii::$app->request->getUserIP();
         $res = Helper::getCityByIp();
         $this->address = $res['province'] . ' ' . $res['city'];
+        $this->browser = Helper::getBrowser();
+        $this->os = Helper::getOs();
         $this->create_time = time();
         $this->save(false);
     }

@@ -42,6 +42,8 @@ use yii\helpers\Url;
             <th>用户名</th>
             <th>IP地址</th>
             <th>位置</th>
+            <th>浏览器</th>
+            <th>操作系统</th>
             <th>登陆时间</th>
             <th>操作</th>
         </thead>
@@ -55,6 +57,8 @@ use yii\helpers\Url;
                 <td><?= $list['user']['name'] ?></td>
                 <td><?= $list['ip'] ?></td>
                 <td><?= $list['address'] ?></td>
+                <td><?= $list['browser'] ?></td>
+                <td><?= $list['os'] ?></td>
                 <td><?= date('Y-m-d H:i:s', $list['create_time']) ?></td>
                 <td class="td-manage">
                     <a title="删除" onclick="del(this,'<?= $list['id'] ?>', '<?= Url::to([$this->context->id . '/del']) ?>')" href="javascript:;">
