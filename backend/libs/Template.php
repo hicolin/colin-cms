@@ -6,10 +6,16 @@
 
 namespace backend\libs;
 
+/**
+ * 部分插件，没有下载。使用时，请使用composer下载
+ */
 use backend\controllers\BaseController;
 use common\models\UploadForm;
 use Yii;
 use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Gregwar\Captcha\CaptchaBuilder;
+use Gregwar\Captcha\PhraseBuilder;
 
 /**
  * 常用功能示例代码
@@ -179,6 +185,44 @@ class Template extends BaseController
             file_put_contents('test.log', $i . "\n", FILE_APPEND);
         }
     }
+
+    /**
+     * imagine 图像处理
+     */
+    public function actionImage()
+    {
+//        $img = Url::to('@web/images/test_img.jpg'); // 对外展示 @web没有在启动文件中定义
+        $img = Yii::getAlias('@backend/web/images/test_img.jpg');
+        $img2 = Yii::getAlias('@backend/web/images/test_img7.png');
+//        Image::frame($img, 5, '666', 0)
+//            ->rotate(-8)
+//            ->save($img2, ['jpeg_quality' => 50]);
+        Image::thumbnail($img, '100', '100')
+            ->save($img2, ['quality' => 100]);
+//        Image::crop($img, '300', '300')
+//            ->save($img2, ['png_quality' => 100]);
+        Image::watermark($img, '@backend/web/images/add_img.png')
+            ->save($img2, ['quality' => 100]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionCaptcha()
+    {
+//        header('Content-type: image/jpeg');
+//        CaptchaBuilder::create()->build()->output();
+//        exit;
+        ob_clean();
+        $phraseBuilder = new PhraseBuilder(4, '0123456789');
+        $builder = new CaptchaBuilder(null, $phraseBuilder);
+        $builder->build(90, 35);
+        $captchaCode = $builder->getPhrase();
+        Yii::$app->session->set('captchaCode', $captchaCode);
+        // or $res = $builder->testPhrase($input)
+        return $this->render('captcha', compact('builder'));
+    }
+
 
 
 }

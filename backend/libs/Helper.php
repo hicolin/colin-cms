@@ -460,6 +460,35 @@ class Helper
         }
     }
 
+    /**
+     * 人性化显示时间
+     * @param $time
+     * @return false|string
+     */
+    public static function formatTime($time)
+    {
+        $formatTime = date("Y-m-d H:i:s", $time);
+        $newTime = time() - $time;
+        if ($newTime < 60) {
+            $str = '刚刚';
+        } elseif ($newTime < 60 * 60) {
+            $min = floor($newTime / 60);
+            $str = $min . '分钟前';
+        } elseif ($newTime < 60 * 60 * 24) {
+            $h = floor($newTime / (60 * 60));
+            $str = $h . '小时前';
+        } elseif ($newTime < 60 * 60 * 24 * 3) {
+            $d = floor($newTime / (60 * 60 * 24));
+            if ($d == 1) {
+                $str = '昨天 ' . $formatTime;
+            } else {
+                $str = '前天 ' . $formatTime;
+            }
+        } else {
+            $str = $formatTime;
+        }
+        return $str;
+    }
 
 
 }
