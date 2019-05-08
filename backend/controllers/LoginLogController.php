@@ -67,4 +67,16 @@ class LoginLogController extends BaseController
         return $this->json(200, '批量删除成功');
     }
 
+    public function actionView()
+    {
+        if (Yii::$app->request->isPost) {
+            $id = (int)Yii::$app->request->post('id');
+            $loginLog = LoginLog::findOne($id);
+            if (!$loginLog) {
+                return $this->json(100, '该条UA不存在');
+            }
+            return $this->json(200, '获取成功', $loginLog->user_agent);
+        }
+    }
+
 }

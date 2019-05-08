@@ -569,6 +569,10 @@ class Helper
             $os = 'Windows 32';
         } else if (preg_match('/linux/i', $agent)) {
             $os = 'Linux';
+            if (strpos($agent, 'Android') !== false) {
+                preg_match("/(?<=Android )[\d\.]{1,}/", $agent, $version);
+                $os = 'Android '.$version[0];
+            }
         } else if (preg_match('/unix/i', $agent)) {
             $os = 'Unix';
         } else if (preg_match('/sun/i', $agent) && preg_match('/os/i', $agent)) {
@@ -577,6 +581,14 @@ class Helper
             $os = 'IBM OS/2';
         } else if (preg_match('/Mac/i', $agent)) {
             $os = 'Mac';
+            if (strpos($agent, 'iPhone') !== false) {
+                preg_match("/(?<=CPU iPhone OS )[\d\_]{1,}/", $agent, $version);
+                $os = 'iPhone '.str_replace('_', '.', $version[0]);
+            }
+            if (strpos($agent, 'iPad') !== false) {
+                preg_match("/(?<=CPU OS )[\d\_]{1,}/", $agent, $version);
+                $os = 'iPad '.str_replace('_', '.', $version[0]);
+            }
         } else if (preg_match('/PowerPC/i', $agent)) {
             $os = 'PowerPC';
         } else if (preg_match('/AIX/i', $agent)) {
@@ -601,15 +613,6 @@ class Helper
             $os = 'webzip';
         } else if (preg_match('/offline/i', $agent)) {
             $os = 'offline';
-        } else if (strpos($agent, 'Android') !== false) {
-            preg_match("/(?<=Android )[\d\.]{1,}/", $agent, $version);
-            $os = 'Android'.$version[0];
-        } elseif (strpos($agent, 'iPhone') !== false) {
-            preg_match("/(?<=CPU iPhone OS )[\d\_]{1,}/", $agent, $version);
-            $os = 'iPhone '.str_replace('_', '.', $version[0]);
-        } elseif (strpos($agent, 'iPad') !== false) {
-            preg_match("/(?<=CPU OS )[\d\_]{1,}/", $agent, $version);
-            $os = 'iPad'.str_replace('_', '.', $version[0]);
         } else {
             $os = '未知操作系统';
         }

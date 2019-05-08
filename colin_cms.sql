@@ -22,24 +22,28 @@ CREATE TABLE `colin_login_log` (
   `address` varchar(100) DEFAULT NULL COMMENT '位置',
   `browser` varchar(100) DEFAULT NULL COMMENT '浏览器',
   `os` varchar(50) DEFAULT NULL COMMENT '操作系统',
+  `user_agent` varchar(255) DEFAULT NULL COMMENT '用户代理',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_login_log` */
 
-insert  into `colin_login_log`(`id`,`user_id`,`ip`,`address`,`browser`,`os`,`create_time`) values 
-(9,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553440309),
-(10,6,'127.0.0.1','北京市 北京市',NULL,NULL,1553440394),
-(11,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553440915),
-(12,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553440996),
-(13,1,'127.0.0.1','安徽省 合肥市',NULL,NULL,1553441073),
-(14,6,'127.0.0.1','安徽省 合肥市',NULL,NULL,1553441107),
-(15,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553559638),
-(16,1,'127.0.0.1','北京市 北京市',NULL,NULL,1553590599),
-(17,1,'::1','北京市 北京市',NULL,NULL,1555926498),
-(18,1,'::1','北京市 北京市',NULL,NULL,1557297906),
-(19,1,'::1','北京市 北京市','Chrome(74.0.3729.131)','Windows 7',1557298406);
+insert  into `colin_login_log`(`id`,`user_id`,`ip`,`address`,`browser`,`os`,`user_agent`,`create_time`) values 
+(9,1,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553440309),
+(10,6,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553440394),
+(11,1,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553440915),
+(12,1,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553440996),
+(13,1,'127.0.0.1','安徽省 合肥市',NULL,NULL,NULL,1553441073),
+(14,6,'127.0.0.1','安徽省 合肥市',NULL,NULL,NULL,1553441107),
+(15,1,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553559638),
+(16,1,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553590599),
+(17,1,'::1','北京市 北京市',NULL,NULL,NULL,1555926498),
+(18,1,'::1','北京市 北京市',NULL,NULL,NULL,1557297906),
+(19,1,'::1','北京市 北京市','Chrome(74.0.3729.131)','Windows 7',NULL,1557298406),
+(20,1,'::1','北京市 北京市','Chrome(74.0.3729.131)','Android5.0',NULL,1557303575),
+(21,1,'::1','北京市 北京市','Safari(604.1)','iPhone 11.0',NULL,1557303646),
+(22,1,'::1','北京市 北京市','Chrome(74.0.3729.131)','Windows 7','Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',1557309303);
 
 /*Table structure for table `colin_member` */
 
@@ -119,7 +123,7 @@ CREATE TABLE `colin_operate_log` (
   `param` text COMMENT '参数',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_operate_log` */
 
@@ -274,7 +278,12 @@ insert  into `colin_operate_log`(`id`,`user_id`,`route_name`,`route`,`param`,`cr
 (152,1,'数据导出','member/export','[]',1555931218),
 (153,1,'数据导出','member/export','{\"search\":{\"nickname\":\"test\",\"tel\":\"\",\"b_time\":\"\",\"e_time\":\"\"}}',1555931276),
 (154,1,'数据导出','member/export','{\"search\":{\"nickname\":\"test\",\"tel\":\"\",\"b_time\":\"\",\"e_time\":\"\"}}',1555931338),
-(155,1,'数据导出','member/export','[]',1557297926);
+(155,1,'数据导出','member/export','[]',1557297926),
+(156,1,'路由添加','menu/route-create','{\"submenu_id\":\"5\"}',1557309331),
+(157,1,'路由添加','menu/route-create','{\"submenu_id\":\"5\",\"route_name\":\"查看UA\",\"route\":\"login-log\\/view\",\"status\":\"1\"}',1557309365),
+(158,1,'管理员编辑','user/update','{\"id\":\"1\"}',1557309377),
+(159,1,'角色编辑','role/update','{\"id\":\"1\"}',1557309382),
+(160,1,'角色编辑','role/update','{\"id\":\"1\",\"name\":\"超级管理员\",\"description\":\"拥有所有权限\",\"ids\":[\"45\",\"46\",\"47\",\"41\",\"42\",\"43\",\"44\",\"38\",\"39\",\"40\",\"49\",\"23\",\"24\",\"25\",\"26\",\"27\",\"28\",\"29\",\"30\",\"31\",\"32\",\"33\",\"34\",\"35\",\"36\",\"37\",\"18\",\"19\",\"20\",\"21\",\"22\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"48\"]}',1557309388);
 
 /*Table structure for table `colin_role` */
 
@@ -292,7 +301,7 @@ CREATE TABLE `colin_role` (
 /*Data for the table `colin_role` */
 
 insert  into `colin_role`(`id`,`name`,`description`,`permission`,`create_time`) values 
-(1,'超级管理员','拥有所有权限','[45,46,47,41,42,43,44,38,39,40,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,18,19,20,21,22,12,13,14,15,16,17,1,2,3,4,5,6,48]',1555930964),
+(1,'超级管理员','拥有所有权限','[45,46,47,41,42,43,44,38,39,40,49,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,18,19,20,21,22,12,13,14,15,16,17,1,2,3,4,5,6,48]',1557309388),
 (4,'测试','测试人员权限','[1,23,12,13,14,38,18,19,20]',1553440441),
 (7,'客服','客服权限','[1,12,13]',1553336925),
 (15,'财务','财务权限','[1,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,41,12,38,18]',1553528140);
@@ -309,7 +318,7 @@ CREATE TABLE `colin_route` (
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 1:启用 2:禁用',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 /*Data for the table `colin_route` */
 
@@ -356,7 +365,8 @@ insert  into `colin_route`(`id`,`submenu_id`,`route_name`,`route`,`status`,`crea
 (45,7,'系统设置查看','set/index',1,1553599121),
 (46,7,'系统网站设置修改','set/change-text',1,1553603409),
 (47,7,'系统图片设置上传','set/change-img',1,1553603448),
-(48,1,'数据导出','member/export',1,1555930932);
+(48,1,'数据导出','member/export',1,1555930932),
+(49,5,'查看UA','login-log/view',1,1557309365);
 
 /*Table structure for table `colin_set` */
 

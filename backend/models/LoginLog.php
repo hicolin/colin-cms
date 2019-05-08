@@ -14,6 +14,7 @@ use Yii;
  * @property string $address 位置
  * @property string $browser 浏览器
  * @property string $os 操作系统
+ * @property string $user_agent 操作系统
  * @property int $create_time 创建时间
  */
 class LoginLog extends Base
@@ -37,6 +38,7 @@ class LoginLog extends Base
             [['address'], 'string', 'max' => 100],
             [['browser'], 'string', 'max' => 100],
             [['os'], 'string', 'max' => 50],
+            [['user_agent'], 'string', 'max' => 255],
         ];
     }
 
@@ -52,6 +54,7 @@ class LoginLog extends Base
             'address' => '位置',
             'browser' => '浏览器',
             'os' => '操作系统',
+            'user_agent' => '用户代理',
             'create_time' => '创建时间',
         ];
     }
@@ -69,6 +72,7 @@ class LoginLog extends Base
         $this->address = $res['province'] . ' ' . $res['city'];
         $this->browser = Helper::getBrowser();
         $this->os = Helper::getOs();
+        $this->user_agent = Yii::$app->request->userAgent;
         $this->create_time = time();
         $this->save(false);
     }

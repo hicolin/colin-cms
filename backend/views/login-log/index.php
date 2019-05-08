@@ -61,6 +61,11 @@ use yii\helpers\Url;
                 <td><?= $list['os'] ?></td>
                 <td><?= date('Y-m-d H:i:s', $list['create_time']) ?></td>
                 <td class="td-manage">
+                    <a title="查看UA"
+                       onclick="view('<?= $list['id'] ?>', '<?= Url::to([$this->context->id . '/view']) ?>')"
+                       href="javascript:;">
+                        <i class="layui-icon">&#xe63c;</i>
+                    </a>
                     <a title="删除" onclick="del(this,'<?= $list['id'] ?>', '<?= Url::to([$this->context->id . '/del']) ?>')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>
                     </a>
@@ -76,3 +81,25 @@ use yii\helpers\Url;
     <?= $this->render('@app/views/layouts/pagination', compact('pagination')) ?>
 
 </div>
+
+<?php $this->beginBlock('footer') ?>
+<script>
+    function view(id, url) {
+        layer.load(3);
+        $.post(url, {id: id}, function (res) {
+            layer.closeAll();
+            if (res.status === 200) {
+                layer.open({
+                    title: '查看UA',
+                    type: 1,
+                    area: ['90%', '90%'],
+                    content: '<div style="padding: 20px">' + res.data + '</div>'
+                });
+            } else {
+                layer.msg(res.msg, {icon: 2, time: 1500})
+            }
+        }, 'json');
+    }
+
+</script>
+<?php $this->endBlock() ?>
