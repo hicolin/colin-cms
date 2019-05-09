@@ -18,6 +18,8 @@ use yii\helpers\Url;
         <form class="layui-form layui-col-md12 x-so">
             <input type="text" name="search[name]"  placeholder="用户名"
                    value="<?= isset($search['name']) ? $search['name'] : '' ?>" autocomplete="off" class="layui-input">
+            <input type="text" name="search[ip]"  placeholder="IP"
+                   value="<?= isset($search['ip']) ? $search['ip'] : '' ?>" autocomplete="off" class="layui-input">
             <input class="layui-input" placeholder="开始日" name="search[b_time]" id="start"
                    value="<?= isset($search['b_time']) ? $search['b_time'] : '' ?>" autocomplete="off">
             <input class="layui-input" placeholder="截止日" name="search[e_time]" id="end"

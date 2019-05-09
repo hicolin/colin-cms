@@ -35,6 +35,9 @@ class LoginLogController extends BaseController
         if (isset($search['name']) && $search['name']) {
             $query = $query->andWhere(['like', 'colin_user.name', $search['name']]);
         }
+        if (isset($search['ip']) && $search['ip']) {
+            $query = $query->andWhere(['like', 'colin_login_log.ip', $search['ip']]);
+        }
         if (isset($search['b_time']) && $search['b_time']) {
             $bTime = strtotime($search['b_time'] . ' 00:00:00');
             $query = $query->andWhere(['>=', 'colin_login_log.create_time', $bTime]);

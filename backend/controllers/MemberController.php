@@ -134,7 +134,8 @@ class MemberController extends BaseController
                 $list[] = implode(',', $item);
             }
         }
-        return $this->csvExport($list, '用户列表');
+        $fileName = '用户列表_' . date('Y-m-d H:i');
+        return $this->csvExport($list, $fileName);
     }
     
 }
