@@ -25,7 +25,17 @@ class IndexController extends BaseController
     {
         $user = User::findOne(Yii::$app->user->getId());
         $role = Role::findOne($user->role_id);
-        return $this->render('welcome', compact('user', 'role'));
+        $sys = [];
+        $sys['yiiVersion'] = Yii::getVersion();
+        $sys['serverAddress'] = Yii::$app->request->hostName;
+        $sys['os'] = php_uname('s'); // or PHP_OS
+        $sys['phpVersion'] = PHP_VERSION;
+        $sys['operationMode'] = PHP_SAPI;
+        $sys['mysqlVersion'] = Yii::$app->db->getServerVersion();
+        $sys['uploadLimit'] = ini_get('upload_max_filesize');
+        $sys['execTime'] = ini_get('max_execution_time');
+        $sys['freeSpace'] = number_format(disk_free_space("/") / 1024 / 1024 / 1024, 2);
+        return $this->render('welcome', compact('user', 'role', 'sys'));
     }
 
     public function actionClearCache()
