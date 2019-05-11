@@ -29,6 +29,7 @@ class IndexController extends BaseController
         $sys['yiiVersion'] = Yii::getVersion();
         $sys['serverAddress'] = Yii::$app->request->hostName;
         $sys['os'] = php_uname('s'); // or PHP_OS
+        $sys['environment'] = $_SERVER['SERVER_SOFTWARE'];
         $sys['phpVersion'] = PHP_VERSION;
         $sys['operationMode'] = PHP_SAPI;
         $sys['mysqlVersion'] = Yii::$app->db->getServerVersion();

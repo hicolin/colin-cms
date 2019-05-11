@@ -76,6 +76,9 @@
                     <th>操作系统</th>
                     <td><?= $sys['os'] ?></td></tr>
                 <tr>
+                    <th>运行环境</th>
+                    <td><?= $sys['environment'] ?></td></tr>
+                <tr>
                     <th>PHP版本</th>
                     <td><?= $sys['phpVersion'] ?></td></tr>
                 <tr>
