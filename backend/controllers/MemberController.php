@@ -17,8 +17,9 @@ class MemberController extends BaseController
         $query = Member::find();
         $search = Yii::$app->request->get('search');
         $query = $this->condition($query, $search);
+        $countQuery = clone $query;
         $pagination = new Pagination([
-           'totalCount' => $query->count(),
+           'totalCount' => $countQuery->count(),
            'defaultPageSize' => 10,
         ]);
         $models = $query
