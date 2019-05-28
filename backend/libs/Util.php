@@ -37,6 +37,23 @@ class Util
         @ini_set('memory_limit', '4000M');//4G;
     }
 
+    /**
+     * 根据QQ号获取用户名和头像等信息
+     * @param $qq
+     * @return mixed
+     */
+    function getUserInfoByQq($qq)
+    {
+        $url = 'http://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=' . $qq;
+        $data = file_get_contents($url);
+        $data = iconv('GB2312', 'UTF-8', $data);
+        $pattern =  '/portraitCallBack\((.*)\)/is';
+        preg_match($pattern, $data, $result);
+        $res = $result[1];
+        $res = json_decode($res, true);
+        return $res;
+    }
+
 
 
 }
