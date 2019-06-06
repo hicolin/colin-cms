@@ -42,7 +42,7 @@ class Util
      * @param $qq
      * @return mixed
      */
-    function getUserInfoByQq($qq)
+    public static function getUserInfoByQq($qq)
     {
         $url = 'http://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=' . $qq;
         $data = file_get_contents($url);
@@ -54,6 +54,17 @@ class Util
         return $res;
     }
 
+    /**
+     * 通过淘宝（阿里云）接口，根据ip获取地理位置接口
+     * @param $ip
+     * @return mixed  // 国家 、省（自治区或直辖市）、市（县）、运营商
+     */
+    public static function getAddressByTaoBao($ip)
+    {
+        $url = 'http://ip.aliyun.com/service/getIpInfo.php?ip=' . $ip;
+        $data = file_get_contents($url);
+        return json_decode($data, true);
+    }
 
 
 }
