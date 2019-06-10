@@ -6,6 +6,7 @@
 
 namespace backend\libs;
 
+use Yii;
 
 class Util
 {
@@ -64,6 +65,22 @@ class Util
         $url = 'http://ip.aliyun.com/service/getIpInfo.php?ip=' . $ip;
         $data = file_get_contents($url);
         return json_decode($data, true);
+    }
+
+    /**
+     * 记录日志
+     * @param $fileName
+     * @param $log
+     */
+    public static function writeLog($fileName, $log)
+    {
+        $logFile = Yii::getAlias('@backend') . "/runtime/logs/{$fileName}.log";
+        $content = date('Y-m-d H:i:s') . $log . "\r\n";
+        if (filesize($logFile < 1024 * 1024 * 5)) { // 5M
+            file_put_contents($logFile, $content, FILE_APPEND);
+        } else {
+            file_put_contents($logFile, $content);
+        }
     }
 
 
