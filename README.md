@@ -46,3 +46,6 @@ http://cms.hicolin.cn     测试账户： test  123456
 
 #### 鸣谢
 特别感谢X-admin, Yii2。
+
+#### 联系方式
+811687790@qq.com
