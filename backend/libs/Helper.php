@@ -349,6 +349,20 @@ class Helper
     }
 
     /**
+     * 通过腾讯地图接口获取地址位置
+     * @param $ip
+     * @return bool|mixed|string  // 国家 、省（自治区或直辖市）、市 、区
+     */
+    public static function getLocationByTencentMap($ip)
+    {
+        $appKey = 'WALBZ-3HPCW-UQJRW-RUXPQ-ME3E2-GLBGK';
+        $url = "https://apis.map.qq.com/ws/location/v1/ip?ip={$ip}&key={$appKey}";
+        $res = file_get_contents($url);
+        $res = json_decode($res, true);
+        return $res;
+    }
+
+    /**
      * 获取设备类型（安卓 or 苹果）
      * @return string
      */
