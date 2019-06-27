@@ -319,6 +319,9 @@ class Helper
         } else {
             $cip = "";
         }
+        if (in_array($cip, ['127.0.0.1', '::1'])) {
+            return '本地';
+        }
         $url = 'http://restapi.amap.com/v3/ip';
         $data = array(
             'output' => 'json',
@@ -349,7 +352,7 @@ class Helper
     }
 
     /**
-     * 通过腾讯地图接口获取地址位置
+     * 通过腾讯地图接口获取地址位置（有时定位是错的）
      * @param $ip
      * @return bool|mixed|string  // 国家 、省（自治区或直辖市）、市 、区
      */

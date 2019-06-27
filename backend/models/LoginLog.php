@@ -66,21 +66,10 @@ class LoginLog extends Base
 
     public function create($userId)
     {
-        $ip = Yii::$app->request->getUserIP();
         $this->user_id = $userId;
-        $this->ip = $ip;
-        if (in_array($ip, ['::1', '127.0.0.1'])) {
-            $location = '本地';
-        } else {
-            $res = Helper::getLocationByTencentMap($ip);
-            if ($res['status'] == 0) {
-                $adInfo = $res['result']['ad_info'];
-                $location = $adInfo['province'] . ' ' . $adInfo['city'] . ' ' . $adInfo['district'];
-            } else {
-                $location = '未知';
-            }
-        }
-        $this->address = $location;
+        $this->ip = Yii::$app->request->getUserIP();
+        $res = Helper::getCityByIp();
+        $this->address = $res['province'] . ' ' . $res['city'];
         $this->browser = Helper::getBrowser();
         $this->os = Helper::getOs();
         $this->user_agent = Yii::$app->request->userAgent;

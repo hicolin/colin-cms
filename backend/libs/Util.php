@@ -97,5 +97,23 @@ class Util
         }
     }
 
+    /**
+     * 获取文章第一张图片做为缩略图
+     * @param $content
+     * @return bool|string
+     */
+    public static function getArticleThumb($content)
+    {
+        $content = stripslashes($content);
+        if(preg_match_all("/(src)=([\"|']?)([^ \"'>]+\.(gif|jpg|jpeg|bmp|png))\\2/i", $content, $matches)) {
+            $str = $matches[3][0];
+            $str = substr($str, 6);
+            if (preg_match('/upload/', $str)) {
+                return $str;
+            }
+        }
+        return '';
+    }
+
 
 }
