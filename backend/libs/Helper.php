@@ -307,26 +307,16 @@ class Helper
 
     /**
      * 根据 ip 获取 当前城市
+     * @param $ip
+     * @return mixed
      */
-    public static function getCityByIp()
+    public static function getCityByIp($ip)
     {
-        if (! empty($_SERVER["HTTP_CLIENT_IP"])) {
-            $cip = $_SERVER["HTTP_CLIENT_IP"];
-        } elseif (! empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-            $cip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-        } elseif (! empty($_SERVER["REMOTE_ADDR"])) {
-            $cip = $_SERVER["REMOTE_ADDR"];
-        } else {
-            $cip = "";
-        }
-        if (in_array($cip, ['127.0.0.1', '::1'])) {
-            return '本地';
-        }
         $url = 'http://restapi.amap.com/v3/ip';
         $data = array(
             'output' => 'json',
             'key' => '16199cf2aca1fb54d0db495a3140b8cb',
-            'ip' => $cip
+            'ip' => $ip
         );
         $postData = http_build_query($data);
         $opts = array(
@@ -339,14 +329,14 @@ class Helper
         $context = stream_context_create($opts);
         $result = file_get_contents($url, false, $context);
         $res = json_decode($result, true);
-        if (count($res['province']) == 0) {
-            $res['province'] = '北京市';
+        if (count($res['province']) == 0) { // 127.0.0.1 ::1
+            $res['province'] = '本地';
         }
-        if (! empty($res['province']) && $res['province'] == "局域网") {
-            $res['province'] = '北京市';
+        if (!empty($res['province']) && $res['province'] == "局域网") {
+            $res['province'] = '本地';
         }
         if (count($res['city']) == 0) {
-            $res['city'] = '北京市';
+            $res['city'] = '本地';
         }
         return $res;
     }
