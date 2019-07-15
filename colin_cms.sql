@@ -29,7 +29,7 @@ CREATE TABLE `colin_login_log` (
 
 /*Data for the table `colin_login_log` */
 
-insert  into `colin_login_log`(`id`,`user_id`,`ip`,`address`,`browser`,`os`,`user_agent`,`create_time`) values 
+insert  into `colin_login_log`(`id`,`user_id`,`ip`,`address`,`browser`,`os`,`user_agent`,`create_time`) values
 (9,1,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553440309),
 (10,6,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553440394),
 (11,1,'127.0.0.1','北京市 北京市',NULL,NULL,NULL,1553440915),
@@ -62,7 +62,7 @@ CREATE TABLE `colin_member` (
 
 /*Data for the table `colin_member` */
 
-insert  into `colin_member`(`id`,`nickname`,`tel`,`password`,`email`,`status`,`create_time`) values 
+insert  into `colin_member`(`id`,`nickname`,`tel`,`password`,`email`,`status`,`create_time`) values
 (1,'Colin','17312341238','$2y$13$r7Tb8JB..LpxahNQEGfrAOwKcVZlXM73OEHn/nOMeZ3Zmn4PDWJwC','12345216@qq.com',1,1521768073),
 (2,'Colin2','17312341235',NULL,'12345678@qq.com',1,1521768273),
 (3,'Colin','17312341234',NULL,'123456@qq.com',1,1521768073),
@@ -105,7 +105,7 @@ CREATE TABLE `colin_menu` (
 
 /*Data for the table `colin_menu` */
 
-insert  into `colin_menu`(`id`,`name`,`icon`,`sort`,`is_show`,`create_time`) values 
+insert  into `colin_menu`(`id`,`name`,`icon`,`sort`,`is_show`,`create_time`) values
 (1,'会员管理','&#xe6b8;',20,1,1521768073),
 (2,'管理员管理','&#xe726;',16,1,1521768073),
 (3,'日志管理','',10,1,1521768073),
@@ -127,7 +127,7 @@ CREATE TABLE `colin_operate_log` (
 
 /*Data for the table `colin_operate_log` */
 
-insert  into `colin_operate_log`(`id`,`user_id`,`route_name`,`route`,`param`,`create_time`) values 
+insert  into `colin_operate_log`(`id`,`user_id`,`route_name`,`route`,`param`,`create_time`) values
 (5,1,'会员添加','member/create','[]',1553523661),
 (6,1,'会员添加','member/create','{\"nickname\":\"1234545\",\"email\":\"12123232\",\"tel\":\"17352909090\",\"status\":\"1\",\"pwd\":\"123\"}',1553523684),
 (7,1,'会员编辑','member/update','{\"id\":\"58\"}',1553523693),
@@ -300,7 +300,7 @@ CREATE TABLE `colin_role` (
 
 /*Data for the table `colin_role` */
 
-insert  into `colin_role`(`id`,`name`,`description`,`permission`,`create_time`) values 
+insert  into `colin_role`(`id`,`name`,`description`,`permission`,`create_time`) values
 (1,'超级管理员','拥有所有权限','[45,46,47,41,42,43,44,38,39,40,49,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,18,19,20,21,22,12,13,14,15,16,17,1,2,3,4,5,6,48]',1557309388),
 (4,'测试','测试人员权限','[1,23,12,13,14,38,18,19,20]',1553440441),
 (7,'客服','客服权限','[1,12,13]',1553336925),
@@ -322,7 +322,7 @@ CREATE TABLE `colin_route` (
 
 /*Data for the table `colin_route` */
 
-insert  into `colin_route`(`id`,`submenu_id`,`route_name`,`route`,`status`,`create_time`) values 
+insert  into `colin_route`(`id`,`submenu_id`,`route_name`,`route`,`status`,`create_time`) values
 (1,1,'会员列表','member/index',1,1521768073),
 (2,1,'会员删除','member/del',1,1521768073),
 (3,1,'会员批量删除','member/batch-del',1,1521768073),
@@ -343,7 +343,7 @@ insert  into `colin_route`(`id`,`submenu_id`,`route_name`,`route`,`status`,`crea
 (23,4,'菜单列表','menu/index',1,1553245834),
 (24,4,'菜单删除','menu/del',1,1553245871),
 (25,4,'菜单批量删除','menu/batch-del',1,1553246089),
-(26,4,' 菜单添加','memu/create',1,1553246123),
+(26,4,' 菜单添加','menu/create',1,1553246123),
 (27,4,'菜单编辑','menu/update',1,1553246169),
 (28,4,'子菜单列表','menu/submenu',1,1553246215),
 (29,4,'子菜单删除','menu/submenu-del',1,1553246313),
@@ -383,7 +383,7 @@ CREATE TABLE `colin_set` (
 
 /*Data for the table `colin_set` */
 
-insert  into `colin_set`(`id`,`key`,`desc`,`value`,`type`) values 
+insert  into `colin_set`(`id`,`key`,`desc`,`value`,`type`) values
 (1,'title','网站标题','Colin CMS',1),
 (2,'logo','logo','/uploads/image/20190326/5c9a27484e4d9.png',2),
 (3,'test','测试','测试值',1),
@@ -406,7 +406,7 @@ CREATE TABLE `colin_submenu` (
 
 /*Data for the table `colin_submenu` */
 
-insert  into `colin_submenu`(`id`,`menu_id`,`route_name`,`route`,`sort`,`is_show`,`create_time`) values 
+insert  into `colin_submenu`(`id`,`menu_id`,`route_name`,`route`,`sort`,`is_show`,`create_time`) values
 (1,1,'会员管理','member/index',10,1,1521768073),
 (2,2,'管理员管理','user/index',10,1,1521768073),
 (3,2,'角色管理','role/index',10,1,1521768073),
@@ -431,7 +431,7 @@ CREATE TABLE `colin_user` (
 
 /*Data for the table `colin_user` */
 
-insert  into `colin_user`(`id`,`role_id`,`name`,`password`,`status`,`create_time`) values 
+insert  into `colin_user`(`id`,`role_id`,`name`,`password`,`status`,`create_time`) values
 (1,1,'admin','$2y$13$VVceeM3SXJJOIj8p9Pk4Be64mF56ajnArZEpM7557.zfAAgnc5KB.',1,1521768073),
 (6,4,'test','$2y$13$Ln878YXekD23XBX8Xexyse3ys8dFBJRJf3CV5hoB3Uz.CDXgmYIn2',2,1521768073),
 (7,7,'kefu','$2y$13$ZQWkdDxAeC7V0GxFisl3MOAXPcD3p9IIMeK3uwrG3vzRIeCK2dSui',1,1553323404);
