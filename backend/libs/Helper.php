@@ -329,13 +329,13 @@ class Helper
         $context = stream_context_create($opts);
         $result = file_get_contents($url, false, $context);
         $res = json_decode($result, true);
-        if (count($res['province']) == 0) { // 127.0.0.1 ::1
+        if (strlen($res['province']) == 0) { // 127.0.0.1 ::1
             $res['province'] = '本地';
         }
         if (!empty($res['province']) && $res['province'] == "局域网") {
             $res['province'] = '本地';
         }
-        if (count($res['city']) == 0) {
+        if (strlen($res['city']) == 0) {
             $res['city'] = '本地';
         }
         return $res;
