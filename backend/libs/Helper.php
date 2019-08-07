@@ -645,5 +645,20 @@ class Helper
         );
     }
 
+    /**
+     * 保存base64编码的图片
+     * @param $base64Str
+     * @param $dir
+     * @return string
+     */
+    public static function saveBase64Img($base64Str, $dir)
+    {
+        is_dir($dir) || mkdir($dir, 0755, true);
+        $base64Str = explode(',', $base64Str);
+        $data = base64_decode($base64Str[1]);
+        $imgName = date('YmdHis') . mt_rand(100000, 999999) . '.png';
+        file_put_contents($dir . $imgName, $data);
+        return $imgName;
+    }
 
 }
