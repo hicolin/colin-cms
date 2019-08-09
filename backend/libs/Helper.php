@@ -269,6 +269,9 @@ class Helper
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate');
         $cookieFile && curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
         $cookieFile && curl_setopt($ch, CURLOPT_COOKIEJAR, $cookieFile);
+		// https请求
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         $r = curl_exec($ch);
         curl_close($ch);
         return $r;
