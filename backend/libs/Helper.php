@@ -263,6 +263,8 @@ class Helper
         curl_setopt($ch, CURLOPT_HEADER, $v);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         $isPost && curl_setopt($ch, CURLOPT_POST, $isPost);
+		// $dataFields每个请求方法的数据处理方式都不一样，有原数组，json_encode,hhttp_build_query等。
+		// 意味着该方法不能完全通用
         $isPost && curl_setopt($ch, CURLOPT_POSTFIELDS, $dataFields);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
