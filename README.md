@@ -43,10 +43,12 @@ X-admin + Yii2
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/215648_8d79791e_1804453.png "sys.png")
 
 #### 演示地址
-http://cms.hicolin.cn     测试账户： test  123456
+http://cms.hicolin.cn  
+测试账户：test  123456
 
 #### 联系方式
-如果您在使用过程中，遇到了一些问题或者有好的建议和意见，可以通过QQ或邮箱联系我： 811687790@qq.com。
+如果您在使用过程中，遇到了一些问题或者有好的建议和意见，可以通过QQ或邮箱联系我： 811687790@qq.com。   
+个人博客：http://www.hicolin.cn
 
 #### 鸣谢
 特别感谢X-admin, Yii2。
