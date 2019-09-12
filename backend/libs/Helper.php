@@ -436,6 +436,38 @@ class Helper
     }
 
     /**
+     * 下载文件(file_get_contents()速度慢，不推荐使用)
+     * @param $file
+     */
+    public static function downloadFile($file)
+    {
+        $fp = fopen($file, 'rb');
+        if ($fp === false) exit('文件不存在或打开失败');
+
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.$file.'"');
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file));
+
+        ob_clean();
+        ob_end_flush();
+        set_time_limit(0);
+
+        $chunkSize = 1024 * 1024;
+        while (!feof($fp)) {
+            $buffer = fread($fp, $chunkSize);
+            echo $buffer;
+            ob_flush();
+            flush();
+        }
+        fclose($fp);
+    }
+
+    /**
      * 校验身份证号码
      * @param $number
      * @return bool
