@@ -45,9 +45,5 @@ X-admin + Yii2
 #### 演示地址
 http://cms.hicolin.cn  测试账户：test  123456
 
-#### 联系方式
-如果您在使用过程中，遇到了一些问题或者有好的建议和意见，可以通过QQ或邮箱联系我： 811687790@qq.com。   
-个人博客：http://www.hicolin.cn
-
 #### 鸣谢
 特别感谢Layui, X-admin, Yii2。
