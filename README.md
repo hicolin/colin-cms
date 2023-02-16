@@ -42,8 +42,6 @@ X-admin + Yii2
 8. 系统设置
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/215648_8d79791e_1804453.png "sys.png")
 
-#### 演示地址
-http://cms.hicolin.cn  测试账户：test  123456
 
 #### 鸣谢
 特别感谢Layui, X-admin, Yii2。
